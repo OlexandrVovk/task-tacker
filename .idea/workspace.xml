@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="eafaef69-c5e4-4919-97d2-e55be8fecdf6" name="Changes" comment="initial commit" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/api-gateway">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/authorization-service">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/eureka-server">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/task-tracker">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2IfsizWqOommFC58nmqgDqlBUPq" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/PROJECTS/internet-banking-concept-microservices&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;05a767234b0bde700064271a80769541&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
+  }
+}</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\PROJECTS\task-tracker-api\api-gateway\src\main\resources" />
+      <recent name="D:\PROJECTS\task-tracker-api\task-tracker\src" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.tasktracker.api.util" />
+      <recent name="com.tasktracker.apigateway.config" />
+      <recent name="com.tasktracker.apigateway.exceptions" />
+      <recent name="com.tasktracker.apigateway.security" />
+      <recent name="com.tasktracker.apigateway.security.services" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.ApiGatewayApplication">
+    <configuration name="task-tracker-api [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="api-gateway.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.tasktracker.apigateway.ApiGatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthorizationServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="authorization-service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.authorizationservice.AuthorizationServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EurekaServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="eureka-server.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.task.tracker.eurekaserver.EurekaServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskTrackerApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="task-tracker.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.tasktracker.TaskTrackerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Gradle.task-tracker-api [build]" />
+      <item itemvalue="Spring Boot.AuthorizationServiceApplication" />
+      <item itemvalue="Spring Boot.TaskTrackerApplication (1)" />
+      <item itemvalue="Spring Boot.ApiGatewayApplication" />
+      <item itemvalue="Spring Boot.EurekaServerApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.task-tracker-api [build]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="eafaef69-c5e4-4919-97d2-e55be8fecdf6" name="Changes" comment="" />
+      <created>1670584106976</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1670584106976</updated>
+      <workItem from="1670584110822" duration="177000" />
+      <workItem from="1670584333311" duration="6800000" />
+      <workItem from="1670661317947" duration="4793000" />
+      <workItem from="1670843564149" duration="4360000" />
+      <workItem from="1670944909097" duration="179000" />
+      <workItem from="1671013625316" duration="9948000" />
+      <workItem from="1671092835451" duration="3982000" />
+      <workItem from="1671116109218" duration="2411000" />
+      <workItem from="1671288607481" duration="8923000" />
+      <workItem from="1671455063621" duration="2765000" />
+      <workItem from="1671538497492" duration="7469000" />
+      <workItem from="1671611450914" duration="10037000" />
+      <workItem from="1671697344435" duration="7273000" />
+      <workItem from="1671716283780" duration="2344000" />
+      <workItem from="1671782886237" duration="7030000" />
+      <workItem from="1671879243939" duration="3195000" />
+      <workItem from="1671883370443" duration="1690000" />
+      <workItem from="1672132512462" duration="4992000" />
+      <workItem from="1672214288588" duration="6313000" />
+      <workItem from="1672304309631" duration="6895000" />
+      <workItem from="1672311472715" duration="3499000" />
+      <workItem from="1672319698894" duration="785000" />
+      <workItem from="1672388672090" duration="3630000" />
+      <workItem from="1672399528386" duration="4226000" />
+      <workItem from="1672409669713" duration="2332000" />
+      <workItem from="1672476488667" duration="1415000" />
+      <workItem from="1672489587390" duration="2258000" />
+      <workItem from="1672737667848" duration="7113000" />
+      <workItem from="1672752338585" duration="5178000" />
+      <workItem from="1672826042103" duration="128000" />
+      <workItem from="1672843245864" duration="1556000" />
+      <workItem from="1672910795279" duration="12924000" />
+      <workItem from="1672936824720" duration="1735000" />
+      <workItem from="1672993895380" duration="4937000" />
+      <workItem from="1673166674512" duration="6891000" />
+    </task>
+    <task id="LOCAL-00001" summary="initial commit">
+      <created>1672759648941</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1672759648941</updated>
+    </task>
+    <task id="LOCAL-00002" summary="initial commit">
+      <created>1673190079626</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1673190079627</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+  </component>
+</project>

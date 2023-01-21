@@ -27,14 +27,6 @@ public class BoardService {
 
     private final BoardDtoFactory boardDtoFactory;
 
-
-    public BoardEntity getBoardOrThrowException(Long boardId) {
-        BoardEntity boardEntity = boardRepo.findById(boardId)
-                .orElseThrow(() -> {
-                    throw new NotFoundException(String.format("Board with id \"%d\" was no found", boardId));
-                });
-        return boardEntity;
-    }
     public BoardEntity getBoardOrThrowException(Long boardId, Long personId) {
         BoardEntity boardEntity = boardRepo.findByPersonIdAndId(personId, boardId)
                 .orElseThrow(() -> {
@@ -79,21 +71,28 @@ public class BoardService {
             throw new BadRequestException("Board name can't be empty");
         }
 
-        BoardEntity boardEntity = boardId
-                .map(this::getBoardOrThrowException)
-                .orElseGet(()->BoardEntity.builder().build());
+        BoardEntity boardEntity;
+        try {
+            boardEntity = (boardId.isPresent()) ?  getBoardOrThrowException(boardId.get(), personId) :
+                    BoardEntity.builder().build();
+        }catch (BadRequestException exception){
+            boardEntity  = BoardEntity.builder().build();
+        }
 
+
+        BoardEntity finalBoardEntity = boardEntity;
         boardName.ifPresent(name -> {
-                    boardRepo.findByNameAndPersonId(name, personId)
-                    .filter(anotherBoard->!Objects.equals(anotherBoard.getId(),boardEntity.getId()))
-                    .ifPresent(anotherBoard->{
+                    Optional<BoardEntity> board = boardRepo.findByNameAndPersonId(name, personId)
+                    .filter(anotherBoard->!Objects.equals(anotherBoard.getId(), finalBoardEntity.getId()));
+
+                    board.ifPresent(anotherBoard->{
                         throw new BadRequestException(
                                 String.format("Board \"%s\" already exists ", name));
                     });
-                    boardEntity.setName(name);
-                    boardEntity.setPersonId(personId);
+                    finalBoardEntity.setName(name);
+                    finalBoardEntity.setPersonId(personId);
         });
-        final BoardEntity savedBoard = boardRepo.saveAndFlush(boardEntity);
+        BoardEntity savedBoard = boardRepo.saveAndFlush(finalBoardEntity);
         return boardDtoFactory.makeBoardDto(savedBoard);
     }
 }

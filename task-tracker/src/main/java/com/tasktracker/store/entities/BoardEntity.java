@@ -34,7 +34,7 @@ public class BoardEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BoardEntity that = (BoardEntity) o;
-        return id.equals(that.id) && name.equals(that.name) && Objects.equals(taskStates, that.taskStates);
+        return id.equals(that.id) && name.equals(that.name) && personId.equals(that.personId) && Objects.equals(taskStates, that.taskStates);
     }
 
 }

@@ -4,3 +4,4 @@ includeBuild 'eureka-server'
 includeBuild 'task-tracker'
 includeBuild 'authorization-service'
 includeBuild 'api-gateway'
+

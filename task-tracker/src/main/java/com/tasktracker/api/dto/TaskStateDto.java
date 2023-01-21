@@ -24,6 +24,5 @@ public class TaskStateDto {
 
     private Long rightTaskStateId;
 
-    @NonNull
     private List<TaskDto> tasks;
 }

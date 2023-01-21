@@ -79,12 +79,13 @@ public class TaskStateController {
 
     @PatchMapping(CHANGE_TASK_STATE_POSITION)
     public List<TaskStateDto> changeTaskStatePosition(@PathVariable("tusk_state_id") Long taskStateId,
-                                                      @RequestParam(value = "another_tusk_state_id", required = false) Long anotherTuskStateId,
+                                                      @RequestParam(value = "previous_task_state_id",required = false) Optional<Long> previousTaskStateId,
+                                                      @RequestParam(value = "next_task_state_id" , required = false)Optional<Long> nextTaskStateId,
                                                       @RequestParam(value = "to_sort", required = false) boolean toSort,
                                                       HttpServletRequest request){
         Long personId = jwtUtil.getPersonId(request);
         List<TaskStateEntity> taskStateEntityList = taskStateService.changeTaskStatePosition(
-                taskStateId, anotherTuskStateId, personId);
+                taskStateId, previousTaskStateId, nextTaskStateId, personId);
 
         if (toSort){
             return taskStateDtoFactory.makeTaskStateDtoList(

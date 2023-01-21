@@ -7,7 +7,9 @@ import com.tasktracker.api.exceptions.BadRequestException;
 import com.tasktracker.api.exceptions.NotFoundException;
 import com.tasktracker.api.factories.TaskStateDtoFactory;
 import com.tasktracker.store.entities.BoardEntity;
+import com.tasktracker.store.entities.TaskEntity;
 import com.tasktracker.store.entities.TaskStateEntity;
+import com.tasktracker.store.repositories.BoardRepo;
 import com.tasktracker.store.repositories.TaskStateRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,10 +26,19 @@ import java.util.stream.Collectors;
 public class TaskStateService {
     private final TaskStateRepo taskStateRepo;
     private final TaskStateDtoFactory taskStateDtoFactory;
-    private final BoardService boardService;
+
+    private final BoardRepo boardRepo;
+
+     private BoardEntity getBoardOrThrowException(Long boardId, Long personId) {
+        BoardEntity boardEntity = boardRepo.findByPersonIdAndId(personId, boardId)
+                .orElseThrow(() -> {
+                    throw new NotFoundException(String.format("Board with id \"%d\" was no found", boardId));
+                });
+        return boardEntity;
+    }
 
     public List<TaskStateEntity> getTaskStates(Long boardId, Long personId) {
-        return  boardService.getBoardOrThrowException(boardId, personId).getTaskStates();
+        return getBoardOrThrowException(boardId, personId).getTaskStates();
     }
 
     @Transactional
@@ -36,7 +47,7 @@ public class TaskStateService {
             throw new BadRequestException("Task state name can't be empty.");
         }
 
-        BoardEntity board = boardService.getBoardOrThrowException(boardId, personId);
+        BoardEntity board = getBoardOrThrowException(boardId, personId);
 
 
         Optional<TaskStateEntity> optionalAnotherTaskState = Optional.empty();
@@ -77,13 +88,13 @@ public class TaskStateService {
         }
         TaskStateEntity taskStateEntity = getTaskStateOrThrowException(taskStateId, personId);
 
-        taskStateRepo
-                .findTaskStateEntityByBoardIdAndNameIgnoreCase(
+
+        taskStateRepo.findTaskStateEntityByBoardIdAndNameIgnoreCase(
                         taskStateEntity.getBoard().getId(), updatedTaskStateName)
-                .filter(anotherTaskState->!anotherTaskState.getId().equals(taskStateId))
+        .filter(anotherTaskState->!anotherTaskState.getId().equals(taskStateId))
                 .ifPresent(it->{
                     throw new BadRequestException(
-                            String.format("Board %s already exists. Can't change name to the same name",updatedTaskStateName)
+                            String.format("Board %s already exists.",updatedTaskStateName)
                     );
                 });
 
@@ -97,7 +108,7 @@ public class TaskStateService {
     public AnswerDto deleteTuskState(Long taskStateId, Optional<Boolean> deleteAll, Long personId) {
         TaskStateEntity taskStateEntity = getTaskStateOrThrowException(taskStateId, personId);
 
-        if (deleteAll.isPresent()){
+        if (deleteAll.isPresent() && deleteAll.get().equals(true)){
             taskStateRepo.deleteAllByBoardId(taskStateEntity.getBoard().getId());
             return AnswerDto.makeDefault(true);
         }
@@ -115,7 +126,7 @@ public class TaskStateService {
             rightTaskState.setLeftTaskState(leftTaskState);
 
             taskStateEntity.setRightTaskState(null);
-            taskStateEntity.setRightTaskState(null);
+            taskStateEntity.setLeftTaskState(null);
             taskStateRepo.save(leftTaskState);
             taskStateRepo.save(rightTaskState);
 
@@ -134,14 +145,6 @@ public class TaskStateService {
         return AnswerDto.makeDefault(true);
     }
 
-    public TaskStateEntity getTaskStateOrThrowException(Long id){
-        return taskStateRepo.findById(id)
-                .orElseThrow(()->{
-                    throw new NotFoundException(
-                            String.format("No task state with id %d exists", id)
-                    );
-                });
-    }
     public TaskStateEntity getTaskStateOrThrowException(Long id, Long personId){
 
         TaskStateEntity taskStateEntity = taskStateRepo.findById(id)
@@ -156,187 +159,6 @@ public class TaskStateService {
             );
         }
         return taskStateEntity;
-    }
-
-    @Transactional
-    public List<TaskStateEntity> changeTaskStatePosition(Long taskStateId, Long anotherTuskStateId, Long personId) {
-        if (anotherTuskStateId==null){
-            TaskStateEntity firstTaskState = setTaskStateToFirstPos(taskStateId, personId);
-            return firstTaskState.getBoard()
-                    .getTaskStates();
-        }
-
-        if (taskStateId.equals(anotherTuskStateId)) {
-            throw new BadRequestException("Both id are equal");
-        }
-
-        TaskStateEntity firstTaskState = getTaskStateOrThrowException(taskStateId, personId);
-        TaskStateEntity secondTaskState= getTaskStateOrThrowException(anotherTuskStateId, personId);
-
-        if (!firstTaskState.getBoard().getId().equals(secondTaskState.getBoard().getId())){
-            throw new BadRequestException("Task states are from different boards");
-        }
-
-        List<TaskStateEntity> taskStateEntityList = toSort(firstTaskState.getBoard().getTaskStates());
-        TaskStateEntity resultTaskState;
-        for (TaskStateEntity taskState : taskStateEntityList) {
-            if(taskState.getId().equals(firstTaskState.getId())){
-                resultTaskState = setTaskStateToTheRight(firstTaskState,secondTaskState);
-                break;
-            }else if (taskState.getId().equals(secondTaskState.getId())){
-                resultTaskState = setTaskStateToTheLeft(firstTaskState,secondTaskState);
-                break;
-            }
-        }
-
-        return firstTaskState.getBoard().getTaskStates();
-    }
-
-    @Transactional
-    TaskStateEntity setTaskStateToFirstPos(Long taskStateId, Long personId){
-        TaskStateEntity taskStateEntity = getTaskStateOrThrowException(taskStateId, personId);
-
-        if (taskStateEntity.getBoard().getTaskStates().size() == 1) return taskStateEntity;
-        if (taskStateEntity.getLeftTaskState().isEmpty()) return taskStateEntity;
-
-        Optional<TaskStateEntity> leftTaskState = taskStateEntity.getLeftTaskState();
-        Optional<TaskStateEntity> rightTaskState = taskStateEntity.getRightTaskState();
-
-        leftTaskState.ifPresent(taskState ->{
-            rightTaskState.ifPresentOrElse(
-                    rightTaskStateEntity -> taskState.setRightTaskState(rightTaskStateEntity),
-                    () -> taskState.setRightTaskState(null)
-            );
-            taskStateRepo.saveAndFlush(taskState);
-        });
-
-        rightTaskState.ifPresent(taskState ->{
-            leftTaskState.ifPresentOrElse(
-                    leftTaskStateEntity -> taskState.setLeftTaskState(leftTaskStateEntity),
-                    () -> taskState.setRightTaskState(null)
-            );
-            taskStateRepo.saveAndFlush(taskState);
-        });
-
-        Optional<TaskStateEntity> firstTaskState = Optional.ofNullable(taskStateEntity
-                .getBoard()
-                .getTaskStates()
-                .stream()
-                .filter(taskState -> {
-                    return taskState.getLeftTaskState().isEmpty();
-                })
-                .findFirst()
-                .orElse(null));
-
-        firstTaskState.ifPresent(taskState->{
-            taskState.setLeftTaskState(taskStateEntity);
-            taskStateEntity.setRightTaskState(taskState);
-            taskStateEntity.setLeftTaskState(null);
-            taskStateRepo.save(taskState);
-        });
-
-        return taskStateRepo.saveAndFlush(taskStateEntity);
-    }
-
-    @Transactional
-    TaskStateEntity setTaskStateToTheRight(TaskStateEntity firstTaskState, TaskStateEntity secondTaskState){
-        //перший зліва, другий справа
-        //змінити право першого на ліво першого
-        //змінити право другого на перший, ліве правого другого на перший
-
-        Optional<TaskStateEntity> firstLeftTaskState = firstTaskState.getLeftTaskState();
-        Optional<TaskStateEntity> firstRightTaskState = firstTaskState.getRightTaskState();
-
-        firstLeftTaskState.ifPresent(taskState -> {
-            if (firstRightTaskState.isPresent()){
-                taskState.setRightTaskState(firstRightTaskState.get());
-            }else {
-                taskState.setRightTaskState(null);
-            }
-            taskStateRepo.save(taskState);
-        });
-
-        firstRightTaskState.ifPresent(taskState -> {
-            if (firstLeftTaskState.isPresent()){
-                taskState.setLeftTaskState(firstLeftTaskState.get());
-            }else {
-                taskState.setLeftTaskState(null);
-            }
-            taskStateRepo.save(taskState);
-        });
-
-        Optional<TaskStateEntity> secondRightTaskState = secondTaskState.getRightTaskState();
-
-        secondRightTaskState.ifPresentOrElse(
-                taskState -> {
-                    taskState.setLeftTaskState(firstTaskState);
-                    firstTaskState.setRightTaskState(taskState);
-                    taskState = taskStateRepo.saveAndFlush(taskState);
-                }, () -> {
-                    firstTaskState.setRightTaskState(null);
-                }
-        );
-
-        secondTaskState.setRightTaskState(firstTaskState);
-        firstTaskState.setLeftTaskState(secondTaskState);
-        taskStateRepo.save(secondTaskState);
-        taskStateRepo.save(firstTaskState);
-
-        return firstTaskState;
-    }
-
-    @Transactional
-    TaskStateEntity setTaskStateToTheLeft(TaskStateEntity firstTaskState, TaskStateEntity secondTaskState){
-        //другий зліва, перший зправа
-        //змінити право першого на ліво першого
-        //змінити ліво другого на перший, право лівого другого на перший
-
-        Optional<TaskStateEntity> fistLeftTaskState = firstTaskState.getLeftTaskState();
-        Optional<TaskStateEntity> fistRightTaskState = firstTaskState.getRightTaskState();
-
-        fistLeftTaskState.ifPresent(taskState -> {
-            if ((fistRightTaskState.isPresent())) {
-                taskState.setRightTaskState(fistRightTaskState.get());
-            } else {
-                taskState.setRightTaskState(null);
-            }
-            taskStateRepo.save(taskState);
-        });
-
-        fistRightTaskState.ifPresent(taskState -> {
-            if(fistLeftTaskState.isPresent()){
-                taskState.setLeftTaskState(fistLeftTaskState.get());
-            }else {
-                taskState.setLeftTaskState(null);
-            }
-            taskStateRepo.save(taskState);
-        });
-
-        Optional<TaskStateEntity> secondLeftTaskState = secondTaskState.getLeftTaskState();
-
-        secondLeftTaskState.ifPresent(taskState -> {
-            taskState.setRightTaskState(firstTaskState);
-            firstTaskState.setLeftTaskState(taskState);
-            taskState = taskStateRepo.saveAndFlush(taskState);
-        });
-
-        secondLeftTaskState.ifPresentOrElse(
-                taskState -> {
-                    taskState.setRightTaskState(firstTaskState);
-                    firstTaskState.setLeftTaskState(taskState);
-                    taskState = taskStateRepo.saveAndFlush(taskState);
-                }, () -> {
-                    firstTaskState.setLeftTaskState(null);
-                }
-        );
-
-        secondTaskState.setLeftTaskState(firstTaskState);
-        firstTaskState.setRightTaskState(secondTaskState);
-        taskStateRepo.save(secondTaskState);
-        taskStateRepo.save(firstTaskState);
-
-        return firstTaskState;
-
     }
 
     public List<TaskStateEntity> toSort(List<TaskStateEntity> unsortedList){
@@ -362,5 +184,95 @@ public class TaskStateService {
 
         return sortedList;
     }
+
+    @Transactional
+    public List<TaskStateEntity> changeTaskStatePosition(Long taskStateId,
+                                                           Optional<Long> previousTaskStateId,
+                                                           Optional<Long> nextTaskStateId,
+                                                           Long personId)
+    {
+        if (previousTaskStateId.isEmpty() && nextTaskStateId.isEmpty()){
+            throw new BadRequestException("previous_task_state_id and next_task_state_id should not be empty");
+        }
+        if (previousTaskStateId.isPresent() && nextTaskStateId.isPresent()){
+            if (previousTaskStateId.get().equals(nextTaskStateId.get())){
+                throw new BadRequestException("previous_task_state_id and next_task_state_id should not be same");
+            }
+        }
+
+        TaskStateEntity currTaskState = getTaskStateOrThrowException(taskStateId, personId);
+        Optional<TaskStateEntity> previousCurrTaskState = currTaskState.getLeftTaskState();
+        Optional<TaskStateEntity> nextCurrTaskState = currTaskState.getRightTaskState();
+
+        previousCurrTaskState.ifPresent(taskState -> {
+            if (nextCurrTaskState.isPresent()){
+                taskState.setRightTaskState(nextCurrTaskState.get());
+            }else {
+                taskState.setRightTaskState(null);
+            }
+            taskStateRepo.save(taskState);
+        });
+
+       nextCurrTaskState.ifPresent(taskState -> {
+            if (previousCurrTaskState.isPresent()){
+                taskState.setLeftTaskState(previousCurrTaskState.get());
+            }else {
+                taskState.setLeftTaskState(null);
+            }
+            taskStateRepo.save(taskState);
+        });
+
+
+       Optional<TaskStateEntity> previousTaskState = (previousTaskStateId.isPresent()) ?
+               Optional.ofNullable(getTaskStateOrThrowException(previousTaskStateId.get(), personId)) : Optional.empty();
+
+       Optional<TaskStateEntity> nextTaskState = (nextTaskStateId.isPresent()) ?
+                Optional.ofNullable(getTaskStateOrThrowException(nextTaskStateId.get(), personId)) : Optional.empty();
+
+
+       if (previousTaskState.isEmpty()){
+           nextTaskState.ifPresent(taskState -> {
+               if(!taskState.getBoard().getId().equals(currTaskState.getBoard().getId())){
+                   throw new BadRequestException(String.format("Task state with id %d is from different board", taskState.getId()));
+               }
+               taskState.setLeftTaskState(currTaskState);
+               currTaskState.setRightTaskState(taskState);
+               taskStateRepo.save(taskState);
+           });
+           currTaskState.setLeftTaskState(null);
+           taskStateRepo.save(currTaskState);
+       }else if (nextTaskState.isEmpty()){
+           previousTaskState.ifPresent(taskState -> {
+               if(!taskState.getBoard().getId().equals(currTaskState.getBoard().getId())){
+                   throw new BadRequestException(String.format("Task state with id %d is from different board", taskState.getId()));
+               }
+               taskState.setRightTaskState(currTaskState);
+               currTaskState.setLeftTaskState(taskState);
+               taskStateRepo.save(taskState);
+           });
+           currTaskState.setRightTaskState(null);
+           taskStateRepo.save(currTaskState);
+       }else {
+           if(!previousTaskState.get().getBoard().getId().equals(currTaskState.getBoard().getId())){
+               throw new BadRequestException(String.format("Task state with id %d is from different board",
+                      previousTaskState.get().getId()));
+           }
+           if(!nextTaskState.get().getBoard().getId().equals(currTaskState.getBoard().getId())){
+               throw new BadRequestException(String.format("Task state with id %d is from different board",
+                      nextCurrTaskState.get().getId()));
+           }
+           previousTaskState.get().setRightTaskState(currTaskState);
+           nextTaskState.get().setLeftTaskState(currTaskState);
+           taskStateRepo.save(previousTaskState.get());
+           taskStateRepo.save(nextTaskState.get());
+
+           currTaskState.setLeftTaskState(previousTaskState.get());
+           currTaskState.setRightTaskState(nextTaskState.get());
+           taskStateRepo.save(currTaskState);
+       }
+
+       return currTaskState.getBoard().getTaskStates();
+    }
+
 
 }

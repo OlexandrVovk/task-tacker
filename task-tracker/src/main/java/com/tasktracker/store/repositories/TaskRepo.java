@@ -9,6 +9,4 @@ import java.util.Optional;
 
 @Repository
 public interface TaskRepo extends JpaRepository<TaskEntity, Long> {
-
-
 }

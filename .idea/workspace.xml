@@ -4,7 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eafaef69-c5e4-4919-97d2-e55be8fecdf6" name="Changes" comment="initial commit" />
+    <list default="true" id="eafaef69-c5e4-4919-97d2-e55be8fecdf6" name="Changes" comment="full project">
+      <change afterPath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/services/BoardServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/services/TaskServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/services/TaskStateServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/store/repositories/BoardRepoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/store/repositories/TaskStateRepoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/task-tracker/src/test/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/task-tracker/src/test/resources/context.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/task-tracker/task-tracker.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/controllers/TaskStateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/controllers/TaskStateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/dto/TaskStateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/dto/TaskStateDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/services/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/services/BoardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/services/TaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/services/TaskService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/services/TaskStateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/services/TaskStateService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/store/entities/BoardEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/store/entities/BoardEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/store/repositories/TaskRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/store/repositories/TaskRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/store/repositories/TaskStateRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/store/repositories/TaskStateRepo.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +54,9 @@
     <projectState path="$PROJECT_DIR$/task-tracker">
       <ProjectState />
     </projectState>
+    <projectState path="$PROJECT_DIR$/task-tracker/test">
+      <ProjectState />
+    </projectState>
   </component>
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
@@ -35,7 +66,12 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="task-tracker-api" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -46,6 +82,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -63,6 +100,10 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
     &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
@@ -70,14 +111,18 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/PROJECTS/internet-banking-concept-microservices&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;jbr-17&quot;,
+    &quot;last_directory_selection&quot;: &quot;D:/PROJECTS/task-tracker-api/task-tracker/src/test/java/com/tasktracker/api/services&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/PROJECTS/task-tracker-api/task-tracker/src/test/resources&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
@@ -95,15 +140,27 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\PROJECTS\task-tracker-api\task-tracker\src\test\resources" />
       <recent name="D:\PROJECTS\task-tracker-api\api-gateway\src\main\resources" />
       <recent name="D:\PROJECTS\task-tracker-api\task-tracker\src" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\PROJECTS\task-tracker-api\task-tracker\src" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.tasktracker.api.services" />
+      <recent name="com.tasktracker.store.repositories" />
+      <recent name="com.tasktracker" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.tasktracker" />
       <recent name="com.tasktracker.api.util" />
       <recent name="com.tasktracker.apigateway.config" />
       <recent name="com.tasktracker.apigateway.exceptions" />
       <recent name="com.tasktracker.apigateway.security" />
-      <recent name="com.tasktracker.apigateway.security.services" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -113,24 +170,118 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ApiGatewayApplication">
-    <configuration name="task-tracker-api [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.TaskStateServiceTest">
+    <configuration name="TaskServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="build" />
+            <option value=":task-tracker:test" />
+            <option value="--tests" />
+            <option value="&quot;com.tasktracker.api.services.TaskServiceTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="TaskStateServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":task-tracker:test" />
+            <option value="--tests" />
+            <option value="&quot;com.tasktracker.api.services.TaskStateServiceTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="TaskStateServiceTest.shouldChangeTaskStatePositionV2" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":task-tracker:test" />
+            <option value="--tests" />
+            <option value="&quot;com.tasktracker.api.services.TaskStateServiceTest.shouldChangeTaskStatePositionV2&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="TaskStateServiceTest.shouldChangeTaskStatePositionV3" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":task-tracker:test" />
+            <option value="--tests" />
+            <option value="&quot;com.tasktracker.api.services.TaskStateServiceTest.shouldChangeTaskStatePositionV3&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="TaskStateServiceTest.shouldThrowExceptionWhenDifferentBoardsChangingTaskStatePosition" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":task-tracker:test" />
+            <option value="--tests" />
+            <option value="&quot;com.tasktracker.api.services.TaskStateServiceTest.shouldThrowExceptionWhenDifferentBoardsChangingTaskStatePosition&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
@@ -164,7 +315,11 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Gradle.task-tracker-api [build]" />
+      <item itemvalue="Gradle.TaskServiceTest" />
+      <item itemvalue="Gradle.TaskStateServiceTest" />
+      <item itemvalue="Gradle.TaskStateServiceTest.shouldChangeTaskStatePositionV2" />
+      <item itemvalue="Gradle.TaskStateServiceTest.shouldChangeTaskStatePositionV3" />
+      <item itemvalue="Gradle.TaskStateServiceTest.shouldThrowExceptionWhenDifferentBoardsChangingTaskStatePosition" />
       <item itemvalue="Spring Boot.AuthorizationServiceApplication" />
       <item itemvalue="Spring Boot.TaskTrackerApplication (1)" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
@@ -172,7 +327,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.task-tracker-api [build]" />
+        <item itemvalue="Gradle.TaskStateServiceTest" />
+        <item itemvalue="Gradle.TaskStateServiceTest.shouldThrowExceptionWhenDifferentBoardsChangingTaskStatePosition" />
+        <item itemvalue="Gradle.TaskServiceTest" />
+        <item itemvalue="Gradle.TaskStateServiceTest.shouldChangeTaskStatePositionV3" />
+        <item itemvalue="Gradle.TaskStateServiceTest.shouldChangeTaskStatePositionV2" />
       </list>
     </recent_temporary>
   </component>
@@ -218,7 +377,36 @@
       <workItem from="1672910795279" duration="12924000" />
       <workItem from="1672936824720" duration="1735000" />
       <workItem from="1672993895380" duration="4937000" />
-      <workItem from="1673166674512" duration="7191000" />
+      <workItem from="1673166674512" duration="7928000" />
+      <workItem from="1673252648223" duration="2224000" />
+      <workItem from="1673254908893" duration="377000" />
+      <workItem from="1673255302876" duration="3574000" />
+      <workItem from="1673338464498" duration="5899000" />
+      <workItem from="1673367825558" duration="4392000" />
+      <workItem from="1673441865399" duration="1293000" />
+      <workItem from="1673533537974" duration="99000" />
+      <workItem from="1673535982007" duration="1193000" />
+      <workItem from="1673602440765" duration="6181000" />
+      <workItem from="1673640158056" duration="2263000" />
+      <workItem from="1673642927117" duration="1577000" />
+      <workItem from="1673687679537" duration="6328000" />
+      <workItem from="1673702812972" duration="464000" />
+      <workItem from="1673710129097" duration="1496000" />
+      <workItem from="1673726988685" duration="1030000" />
+      <workItem from="1673730548131" duration="262000" />
+      <workItem from="1673778015666" duration="72000" />
+      <workItem from="1673781612918" duration="1324000" />
+      <workItem from="1673808731256" duration="4458000" />
+      <workItem from="1673864173298" duration="4886000" />
+      <workItem from="1673943636423" duration="6358000" />
+      <workItem from="1673969629428" duration="4195000" />
+      <workItem from="1674027311792" duration="2837000" />
+      <workItem from="1674051577758" duration="4172000" />
+      <workItem from="1674121223660" duration="11645000" />
+      <workItem from="1674201938248" duration="7863000" />
+      <workItem from="1674212117657" duration="922000" />
+      <workItem from="1674221995563" duration="915000" />
+      <workItem from="1674291673056" duration="6587000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1672759648941</created>
@@ -241,7 +429,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673190393737</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="full project">
+      <created>1673190519200</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1673190519200</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,6 +455,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+    <MESSAGE value="full project" />
+    <option name="LAST_COMMIT_MESSAGE" value="full project" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/services/TaskServiceTest.java</url>
+          <line>129</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

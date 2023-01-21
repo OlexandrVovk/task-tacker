@@ -8,6 +8,7 @@ import com.tasktracker.api.factories.TaskDtoFactory;
 import com.tasktracker.store.entities.TaskEntity;
 import com.tasktracker.store.entities.TaskStateEntity;
 import com.tasktracker.store.repositories.TaskRepo;
+import com.tasktracker.store.repositories.TaskStateRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,15 +21,17 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class TaskService {
-
     private final TaskRepo taskRepo;
     private final TaskDtoFactory taskDtoFactory;
-
-    private final TaskStateService taskStateService;
+    private final TaskStateRepo taskStateRepo;
 
     @Transactional
     public TaskDto createTask(Long taskStateId, String taskName, Long personId) {
-        TaskStateEntity taskStateEntity = taskStateService.getTaskStateOrThrowException(taskStateId, personId);
+        if (taskName.isBlank()) {
+            throw new BadRequestException("Task state name can't be empty.");
+        }
+
+        TaskStateEntity taskStateEntity = getTaskStateOrThrowException(taskStateId, personId);
 
         Optional<TaskEntity> optionalTaskEntity = Optional.empty();
         for (TaskEntity task : taskStateEntity.getTasks()){
@@ -55,12 +58,23 @@ public class TaskService {
         });
 
         final TaskEntity savedTask = taskRepo.saveAndFlush(taskEntity);
-
         return taskDtoFactory.makeTaskDto(savedTask);
     }
 
+    private TaskStateEntity getTaskStateOrThrowException(Long taskStateId, Long personId) {
+        Optional<TaskStateEntity> optionalTaskStateEntity = taskStateRepo.findById(taskStateId);
+        if (optionalTaskStateEntity.isEmpty()){
+            throw new NotFoundException(String.format("Task state with id %d was not found", taskStateId));
+        }else {
+            if (optionalTaskStateEntity.get().getBoard().getPersonId() != personId){
+                throw new NotFoundException(String.format("Task state with id %d was not found", taskStateId));
+            }
+        }
+        return optionalTaskStateEntity.get();
+    }
+
     public List<TaskEntity> getTasks(Long taskStateId, Long personId) {
-        TaskStateEntity taskStateEntity = taskStateService.getTaskStateOrThrowException(taskStateId, personId);
+        TaskStateEntity taskStateEntity = getTaskStateOrThrowException(taskStateId, personId);
         return taskStateEntity.getTasks();
     }
 
@@ -72,7 +86,6 @@ public class TaskService {
         Optional<TaskEntity> optionalRightTask = taskEntity.getRightTask();
 
         if (optionalLeftTask.isEmpty() && optionalRightTask.isEmpty()){
-            //один елемент в списку
             taskRepo.deleteById(taskId);
         } else if (optionalLeftTask.isPresent() && optionalRightTask.isPresent()){
             TaskEntity leftTask = optionalLeftTask.get();
@@ -84,7 +97,6 @@ public class TaskService {
             taskRepo.save(rightTask);
 
             taskRepo.deleteById(taskId);
-            // середній
         } else if (optionalLeftTask.isPresent() && optionalRightTask.isEmpty()){
             TaskEntity leftTask = optionalLeftTask.get();
 
@@ -92,7 +104,6 @@ public class TaskService {
             taskRepo.save(leftTask);
 
             taskRepo.deleteById(taskId);
-            // кінець
         }else if (optionalLeftTask.isEmpty() && optionalRightTask.isPresent()){
             TaskEntity rightTask = optionalRightTask.get();
 
@@ -105,12 +116,6 @@ public class TaskService {
         return AnswerDto.makeDefault(true);
     }
 
-    public TaskEntity getTaskOrThrowException(Long taskId){
-       return taskRepo.findById(taskId).orElseThrow(
-               () -> {
-                   throw new NotFoundException(String.format("Task with id %d was not found", taskId));
-               });
-    }
 
     public TaskEntity getTaskOrThrowException(Long taskId, Long personId){
         TaskEntity taskEntity  = taskRepo.findById(taskId).orElseThrow(
@@ -162,7 +167,12 @@ public class TaskService {
                                        Optional<Long> nextTaskId,
                                        Long personId ){
         if (previousTaskId.isEmpty() && nextTaskId.isEmpty()){
-            throw new BadRequestException("Previous task id and next task id should not be empty");
+            throw new BadRequestException("previous_task_id and next_task_id should not be empty");
+        }
+        if (previousTaskId.isPresent() && nextTaskId.isPresent()){
+            if (previousTaskId.get().equals(nextTaskId.get())){
+                throw new BadRequestException("previous_task_id and next_task_id should not be same");
+            }
         }
 
         TaskEntity currTask = getTaskOrThrowException(taskId, personId);
@@ -194,15 +204,23 @@ public class TaskService {
 
         if (previousTask.isEmpty()){
             nextTask.ifPresent(task -> {
+                if (!task.getTaskState().getBoard().getId()
+                        .equals(currTask.getTaskState().getBoard().getId())){
+                    throw new BadRequestException(String.format("Task with id %d is from different board", task.getId()));
+                }
                 task.setLeftTask(currTask);
                 currTask.setRightTask(task);
-                taskRepo.save(currTask);
+                taskRepo.save(task);
             });
             currTask.setLeftTask(null);
             taskRepo.save(currTask);
 
         }else if (nextTask.isEmpty()){
             previousTask.ifPresent(task -> {
+                if (!task.getTaskState().getBoard().getId()
+                        .equals(currTask.getTaskState().getBoard().getId())){
+                    throw new BadRequestException(String.format("Task with id %d is from different board", task.getId()));
+                }
                 task.setRightTask(currTask);
                 currTask.setLeftTask(task);
                 taskRepo.save(task);
@@ -210,6 +228,16 @@ public class TaskService {
             currTask.setRightTask(null);
             taskRepo.save(currTask);
         }else {
+            if (!previousTask.get().getTaskState().getBoard().getId()
+                    .equals(currTask.getTaskState().getBoard().getId())){
+                throw new BadRequestException(String.format("Task with id %d is from different board",
+                        previousTask.get().getId()));
+            }
+            if (!nextTask.get().getTaskState().getBoard().getId()
+                    .equals(currTask.getTaskState().getBoard().getId())){
+                throw new BadRequestException(String.format("Task with id %d is from different board",
+                        nextTask.get().getId()));
+            }
             previousTask.get().setRightTask(currTask);
             nextTask.get().setLeftTask(currTask);
             taskRepo.save(previousTask.get());

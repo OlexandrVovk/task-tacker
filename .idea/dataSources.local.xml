@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="IU-223.8214.52">
-    <data-source name="task-tracker@localhost [2]" uuid="c97b2c7a-33eb-4a29-b5c7-1bd3e6f30f72">
+    <data-source name="task-tracker@localhost" uuid="3baa5cab-9a98-4f93-87db-2867feeb990c">
       <database-info product="PostgreSQL" version="15.1" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.5.0" dbms="POSTGRES" exact-version="15.1" exact-driver-version="42.5">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
@@ -10,7 +10,11 @@
       <user-name>postgres</user-name>
       <schema-mapping>
         <introspection-scope>
-          <node kind="database" negative="1" />
+          <node kind="database">
+            <name qname="postgres" />
+            <name qname="task-tracker" />
+            <node kind="schema" negative="1" />
+          </node>
         </introspection-scope>
       </schema-mapping>
     </data-source>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/data/jpa https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+    <jpa:repositories base-package="com.tasktracker.store.repositories"/>
+
+    <bean id="BoardController" class="com.tasktracker.api.controllers.BoardController" >
+        <constructor-arg index="0" ref="JwtUtil"/>
+        <constructor-arg index="1" ref="BoardService"/>
+    </bean>
+
+    <bean id="JwtUtil" class="com.tasktracker.api.util.JWTUtil"/>
+
+
+    <bean id="BoardService" class="com.tasktracker.api.services.BoardService">
+        <constructor-arg index="0">
+            <null/>
+        </constructor-arg>
+        <constructor-arg index="1" ref="BoardDtoFactory"/>
+    </bean>
+
+    <bean id="BoardDtoFactory" class="com.tasktracker.api.factories.BoardDtoFactory"/>
+</beans>

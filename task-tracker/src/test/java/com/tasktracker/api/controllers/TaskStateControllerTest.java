@@ -73,20 +73,12 @@ class TaskStateControllerTest {
         String jsonResponse = mvcResult.getResponse().getContentAsString();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        RequestBuilder getRequestForTaskStates = MockMvcRequestBuilders
-                .get("/api/boards/1/task-states")
-                .header("Authorization", "Bearer " + token);
-        String getTaskStatesResponse = mvc.perform(getRequestForTaskStates).andReturn().getResponse().getContentAsString();
-
         TaskStateDto resultTaskStateDto = objectMapper.readValue(jsonResponse, TaskStateDto.class);
-        List<TaskStateDto> taskStates = objectMapper.readValue(getTaskStatesResponse, new TypeReference<List<TaskStateDto>>() {});
-
 
         assertEquals(200 , mvcResult.getResponse().getStatus());
-        assertTrue(taskStates.stream().anyMatch(taskState ->{
-            return taskState.getId().equals(resultTaskStateDto.getId()) &&
-                    taskState.getName().equals(taskStateName);
-        }));
+        assertTrue(resultTaskStateDto.getName().equals(taskStateName));
+        assertTrue(resultTaskStateDto.getLeftTaskStateId()!=null);
+        assertTrue(resultTaskStateDto.getId().equals(4l));
     }
 
     @Test

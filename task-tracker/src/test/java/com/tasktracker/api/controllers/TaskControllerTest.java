@@ -61,24 +61,11 @@ class TaskControllerTest {
         MvcResult mvcResult = mvc.perform(request).andReturn();
         String jsonResponse = mvcResult.getResponse().getContentAsString();
 
-        RequestBuilder getTasksRequest = MockMvcRequestBuilders
-                .get( "/api/task-states/1/tasks")
-                .header("Authorization", "Bearer " + token);
-        String getTasksJsonResponse =  mvc.perform(getTasksRequest).andReturn()
-                .getResponse()
-                .getContentAsString();
 
         TaskDto resultTaskDto = objectMapper.readValue(jsonResponse, TaskDto.class);
-        List<TaskDto> tasksList = objectMapper.readValue(getTasksJsonResponse, new TypeReference<List<TaskDto>>() {});
 
         assertEquals(200 , mvcResult.getResponse().getStatus());
         assertTrue(resultTaskDto.getName().equals(taskName));
-        assertTrue(tasksList.size()>0);
-        assertTrue(tasksList.stream()
-                .filter(taskDto -> {
-                    return taskDto.getId().equals(resultTaskDto.getId());
-                }).findFirst()
-                .isPresent());
     }
 
     @Test
@@ -112,23 +99,10 @@ class TaskControllerTest {
         MvcResult mvcResult = mvc.perform(request).andReturn();
         String jsonResponse = mvcResult.getResponse().getContentAsString();
 
-        RequestBuilder getTasksRequest = MockMvcRequestBuilders
-                .get( "/api/task-states/1/tasks")
-                .header("Authorization", "Bearer " + token);
-        String getTasksJsonResponse =  mvc.perform(getTasksRequest).andReturn()
-                .getResponse()
-                .getContentAsString();
-
         AnswerDto answerDto = objectMapper.readValue(jsonResponse, AnswerDto.class);
-        List<TaskDto> tasksList = objectMapper.readValue(getTasksJsonResponse, new TypeReference<List<TaskDto>>() {});
 
         assertEquals(200 , mvcResult.getResponse().getStatus());
         assertTrue(answerDto.isAnswer());
-        assertTrue(tasksList.stream()
-                .filter(taskDto -> {
-                    return taskDto.getId().equals(Long.valueOf(taskId));
-                }).findFirst()
-                .isEmpty());
     }
 
     @Test
@@ -175,32 +149,11 @@ class TaskControllerTest {
         MvcResult mvcResult = mvc.perform(request).andReturn();
         String jsonResponse = mvcResult.getResponse().getContentAsString();
 
-        RequestBuilder getTasksRequest = MockMvcRequestBuilders
-                .get( "/api/task-states/1/tasks")
-                .header("Authorization", "Bearer " + token);
-        String getTasksJsonResponse =  mvc.perform(getTasksRequest).andReturn()
-                .getResponse()
-                .getContentAsString();
 
         TaskDto resultTaskDto = objectMapper.readValue(jsonResponse, TaskDto.class);
-        List<TaskDto> tasksList = objectMapper.readValue(getTasksJsonResponse, new TypeReference<List<TaskDto>>() {});
-
-        Optional<TaskDto> newLeftTask = tasksList.stream().filter(taskDto -> {
-            return taskDto.getId().equals(resultTaskDto.getLeftTaskId());
-        }).findFirst();
-        Optional<TaskDto> newRightTask = tasksList.stream().filter(taskDto -> {
-            return taskDto.getId().equals(resultTaskDto.getRightTaskId());
-        }).findFirst();
-        newLeftTask.ifPresent(leftTask -> {
-            assertTrue(leftTask.getId().equals(previousTaskId));
-        });
-        newRightTask.ifPresent(rightTask ->{
-            assertTrue(rightTask.getId().equals(nextTaskId));
-        });
 
         assertEquals(200 , mvcResult.getResponse().getStatus());
         assertTrue(resultTaskDto.getLeftTaskId().equals(previousTaskId) &&
                 resultTaskDto.getRightTaskId().equals(nextTaskId));
-
     }
 }

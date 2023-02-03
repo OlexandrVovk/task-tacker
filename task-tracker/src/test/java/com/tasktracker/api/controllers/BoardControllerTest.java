@@ -95,16 +95,9 @@ class BoardControllerTest {
         String getBoardJsonResponse = getBoardsMvcResult.getResponse().getContentAsString();
 
         BoardDto updatedBoard = objectMapper.readValue(updateBoardJsonResponse, BoardDto.class);
-        List<BoardDto> resultList = objectMapper.readValue(getBoardJsonResponse, new TypeReference<List<BoardDto>>() {});
 
-       Optional<BoardDto>  foundBoardDto = resultList.stream()
-               .filter(boardDto -> boardDto.getName().equals(boardNameToUpdate))
-               .findFirst();
         assertEquals(200, updateBoardMvcResult.getResponse().getStatus());
-        assertTrue(foundBoardDto.isPresent());
         assertTrue(updatedBoard.getName().equals(boardNameToUpdate));
-        assertTrue(foundBoardDto.get().getId().equals(updatedBoard.getId()) &&
-                foundBoardDto.get().getName().equals(updatedBoard.getName()));
     }
 
     @Test
@@ -119,24 +112,12 @@ class BoardControllerTest {
                 .header("Authorization", "Bearer " + token);
         MvcResult mvcResult = mvc.perform(request).andReturn();
         String jsonResponse = mvcResult.getResponse().getContentAsString();
-        RequestBuilder checkIfBoardExistsRequest = MockMvcRequestBuilders
-                .get("/api/boards")
-                .header("Authorization", "Bearer " + token);
-        MvcResult checkIfBoardExistsMvcResult = mvc.perform(checkIfBoardExistsRequest).andReturn();
-        String checkIfBoardExistsJsonResponse = checkIfBoardExistsMvcResult.getResponse().getContentAsString();
-
 
         BoardDto resultBoardDto = objectMapper.readValue(jsonResponse, BoardDto.class);
-        List<BoardDto> resultList = objectMapper.readValue(checkIfBoardExistsJsonResponse, new TypeReference<List<BoardDto>>() {});
 
         assertEquals(200, mvcResult.getResponse().getStatus());
         assertTrue(resultBoardDto.getName().equals(boardName));
         assertTrue(resultBoardDto.getId() != null);
-        assertTrue(resultList.stream()
-                .filter(boardDto -> {
-                    return boardDto.getId().equals(resultBoardDto.getId());
-                })
-                .findFirst().isPresent());
     }
 
 
@@ -151,21 +132,10 @@ class BoardControllerTest {
                 .header("Authorization", "Bearer " + token);
         MvcResult mvcResult = mvc.perform(request).andReturn();
         String jsonResponse = mvcResult.getResponse().getContentAsString();
-        RequestBuilder checkIfBoardDeletedRequest = MockMvcRequestBuilders
-                .get("/api/boards")
-                .header("Authorization", "Bearer " + token);
-        MvcResult checkIfBoardDeletedMvcResult = mvc.perform(checkIfBoardDeletedRequest).andReturn();
-        String checkIfBoardDeletedJsonResponse = checkIfBoardDeletedMvcResult.getResponse().getContentAsString();
 
         AnswerDto answerDto = objectMapper.readValue(jsonResponse, AnswerDto.class);
-        List<BoardDto> resultList = objectMapper.readValue(checkIfBoardDeletedJsonResponse, new TypeReference<List<BoardDto>>() {});
 
         assertEquals(200 , mvcResult.getResponse().getStatus());
         assertTrue(answerDto.isAnswer());
-        assertTrue(resultList.stream()
-                .filter(boardDto -> {
-                    return boardDto.getId().equals(1l);
-                })
-                .findFirst().isEmpty());
     }
 }

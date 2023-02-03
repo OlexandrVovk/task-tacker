@@ -5,16 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eafaef69-c5e4-4919-97d2-e55be8fecdf6" name="Changes" comment="added unit test for repositories and services">
-      <change afterPath="$PROJECT_DIR$/.idea/modules/authorization-service/authorization-service.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/exceptions/BadRequestException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/filters/CustomAuthenticationEntryPoint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/main/resources/ApplicationContext.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/test/java/com/authorizationservice/controllers/AuthorizationControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/test/java/com/authorizationservice/repositories/PersonRepoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/test/java/com/authorizationservice/services/AuthorizationServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/test/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/test/resources/empty/reset.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-service/src/test/resources/init/person-data.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
@@ -26,20 +16,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c/storage_v2/_src_/database/task-tracker.8Jq0nw/schema/information_schema.FNRwLQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c/storage_v2/_src_/database/task-tracker.8Jq0nw/schema/information_schema.FNRwLQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c/storage_v2/_src_/database/task-tracker.8Jq0nw/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c/storage_v2/_src_/database/task-tracker.8Jq0nw/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c/storage_v2/_src_/database/task-tracker.8Jq0nw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c/storage_v2/_src_/database/task-tracker.8Jq0nw/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authorization-service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/config/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/controllers/AuthorizationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/controllers/AuthorizationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/dto/PersonDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/dto/PersonDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/entity/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/entity/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/filters/JWTFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/filters/JWTFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/services/AuthorizationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/services/AuthorizationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/services/CustomUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/services/CustomUserDetailsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/util/JWTUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/util/JWTUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-tracker/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/filters/CustomAuthenticationEntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/filters/CustomAuthenticationEntryPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-service/src/test/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/test/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/controllers/BoardControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/controllers/BoardControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/controllers/TaskControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/controllers/TaskControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/controllers/TaskStateControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/controllers/TaskStateControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/test/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/test/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,30 +165,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.AuthorizationControllerTest.shouldPerformLogin">
-    <configuration name="AuthorizationControllerTest.performRegistration" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":authorization-service:test" />
-            <option value="--tests" />
-            <option value="&quot;com.authorizationservice.controllers.AuthorizationControllerTest.performRegistration&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Gradle.TaskControllerTest">
     <configuration name="AuthorizationControllerTest.shouldPerformLogin" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -229,7 +189,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="AuthorizationServiceTest.shouldLoginUser" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="BoardControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -240,9 +200,9 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value=":authorization-service:test" />
+            <option value=":task-tracker:test" />
             <option value="--tests" />
-            <option value="&quot;com.authorizationservice.services.AuthorizationServiceTest.shouldLoginUser&quot;" />
+            <option value="&quot;com.tasktracker.api.controllers.BoardControllerTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -252,7 +212,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="AuthorizationServiceTest.shouldThrowBadRequestExcWhenSameUserExists_RegisterUser" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="BoardControllerTest.shouldFetchBoardsWhenGivenName" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -263,9 +223,9 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value=":authorization-service:test" />
+            <option value=":task-tracker:test" />
             <option value="--tests" />
-            <option value="&quot;com.authorizationservice.services.AuthorizationServiceTest.shouldThrowBadRequestExcWhenSameUserExists_RegisterUser&quot;" />
+            <option value="&quot;com.tasktracker.api.controllers.BoardControllerTest.shouldFetchBoardsWhenGivenName&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -275,7 +235,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="AuthorizationServiceTest.shouldThrowBadRequestExceptionWhenIncorrectPassword_LoginUser" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TaskControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -286,9 +246,32 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value=":authorization-service:test" />
+            <option value=":task-tracker:test" />
             <option value="--tests" />
-            <option value="&quot;com.authorizationservice.services.AuthorizationServiceTest.shouldThrowBadRequestExceptionWhenIncorrectPassword_LoginUser&quot;" />
+            <option value="&quot;com.tasktracker.api.controllers.TaskControllerTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="TaskStateControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":task-tracker:test" />
+            <option value="--tests" />
+            <option value="&quot;com.tasktracker.api.controllers.TaskStateControllerTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -327,11 +310,11 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Gradle.AuthorizationControllerTest.performRegistration" />
+      <item itemvalue="Gradle.BoardControllerTest" />
+      <item itemvalue="Gradle.BoardControllerTest.shouldFetchBoardsWhenGivenName" />
+      <item itemvalue="Gradle.TaskControllerTest" />
+      <item itemvalue="Gradle.TaskStateControllerTest" />
       <item itemvalue="Gradle.AuthorizationControllerTest.shouldPerformLogin" />
-      <item itemvalue="Gradle.AuthorizationServiceTest.shouldLoginUser" />
-      <item itemvalue="Gradle.AuthorizationServiceTest.shouldThrowBadRequestExceptionWhenIncorrectPassword_LoginUser" />
-      <item itemvalue="Gradle.AuthorizationServiceTest.shouldThrowBadRequestExcWhenSameUserExists_RegisterUser" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
       <item itemvalue="Spring Boot.EurekaServerApplication" />
       <item itemvalue="Spring Boot.AuthorizationServiceApplication" />
@@ -339,11 +322,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.TaskControllerTest" />
+        <item itemvalue="Gradle.TaskStateControllerTest" />
+        <item itemvalue="Gradle.BoardControllerTest" />
+        <item itemvalue="Gradle.BoardControllerTest.shouldFetchBoardsWhenGivenName" />
         <item itemvalue="Gradle.AuthorizationControllerTest.shouldPerformLogin" />
-        <item itemvalue="Gradle.AuthorizationControllerTest.performRegistration" />
-        <item itemvalue="Gradle.AuthorizationServiceTest.shouldThrowBadRequestExceptionWhenIncorrectPassword_LoginUser" />
-        <item itemvalue="Gradle.AuthorizationServiceTest.shouldLoginUser" />
-        <item itemvalue="Gradle.AuthorizationServiceTest.shouldThrowBadRequestExcWhenSameUserExists_RegisterUser" />
       </list>
     </recent_temporary>
   </component>
@@ -440,7 +423,8 @@
       <workItem from="1675238269878" duration="2415000" />
       <workItem from="1675254479233" duration="3329000" />
       <workItem from="1675343993177" duration="7294000" />
-      <workItem from="1675418031724" duration="3045000" />
+      <workItem from="1675418031724" duration="4717000" />
+      <workItem from="1675427481759" duration="1369000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1672759648941</created>

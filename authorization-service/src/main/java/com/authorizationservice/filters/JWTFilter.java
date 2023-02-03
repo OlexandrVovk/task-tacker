@@ -22,7 +22,6 @@ public class JWTFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        System.out.println("``````````````");
         String authHeader = request.getHeader("Authorization");
        if (authHeader!=null && authHeader.isBlank() && authHeader.startsWith("Bearer ")){
            String jwt = authHeader.substring(7);
@@ -32,8 +31,8 @@ public class JWTFilter extends OncePerRequestFilter {
                        "Missing JWT token");
            }else {
                try {
-                   String username = jwtUtil.validateTokenAndRetrieveClaim(jwt);
-                   UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                   Long personId = jwtUtil.validateTokenAndRetrieveClaim(jwt);
+                   UserDetails userDetails = userDetailsService.loadUserByUserId(personId);
                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                            userDetails.getPassword(),
                            userDetails.getAuthorities());

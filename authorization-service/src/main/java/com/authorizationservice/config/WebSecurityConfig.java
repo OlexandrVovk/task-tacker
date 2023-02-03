@@ -1,14 +1,12 @@
 package com.authorizationservice.config;
 
+import com.authorizationservice.filters.CustomAuthenticationEntryPoint;
 import com.authorizationservice.filters.JWTFilter;
 import com.authorizationservice.filters.JWTAuthenticationFilter;
 import com.authorizationservice.services.CustomUserDetailsService;
 import com.authorizationservice.util.CustomAuthenticationManager;
 import com.authorizationservice.util.JWTUtil;
-import jakarta.servlet.Filter;
 import lombok.AllArgsConstructor;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.boot.web.servlet.filter.OrderedFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,12 +14,9 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.filter.OncePerRequestFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -31,7 +26,7 @@ public class WebSecurityConfig {
     private final CustomUserDetailsService userDetailsService;
     private final CustomAuthenticationManager customAuthenticationManager;
     private final JWTUtil jwtUtil;
-
+    private final CustomAuthenticationEntryPoint authenticationEntryPoint;
 
 
     @Bean
@@ -47,11 +42,15 @@ public class WebSecurityConfig {
 
         http.addFilterAfter(jwtFilter(), JWTAuthenticationFilter.class);
 
+        http.exceptionHandling()
+                .authenticationEntryPoint(authenticationEntryPoint);
+
         http.authorizeHttpRequests()
                 .requestMatchers("/api/auth/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and().httpBasic();
+
 
         return http.build();
     }

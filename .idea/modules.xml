@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-gateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/api-gateway.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/authorization-service/authorization-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/authorization-service/authorization-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/authorization-service/authorization-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/authorization-service/authorization-service.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/task-tracker/task-tracker.main.iml" filepath="$PROJECT_DIR$/.idea/modules/task-tracker/task-tracker.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/task-tracker/task-tracker.test.iml" filepath="$PROJECT_DIR$/.idea/modules/task-tracker/task-tracker.test.iml" />
     </modules>

@@ -1,8 +1,8 @@
 package com.authorizationservice.services;
 
 import com.authorizationservice.entity.Person;
+import com.authorizationservice.exceptions.BadRequestException;
 import com.authorizationservice.repositories.PersonRepo;
-import jakarta.ws.rs.BadRequestException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +29,6 @@ public class AuthorizationService {
             throw new BadRequestException(String.format("User %s was not found", person.getName()));
         }
         if  (!person.getPassword().equals(foundPerson.get().getPassword())){
-            System.out.println(person.getPassword() + " " + foundPerson.get().getPassword());
             throw new BadRequestException("Incorrect password");
         }
         return foundPerson.get();

@@ -1,0 +1,1 @@
+insert into person (username, password) values ('test user', 'test password');

@@ -5,7 +5,10 @@ import com.authorizationservice.entity.Person;
 import com.authorizationservice.services.AuthorizationService;
 import com.authorizationservice.util.JWTUtil;
 import lombok.AllArgsConstructor;
+import org.apache.coyote.Response;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,18 +23,15 @@ public class AuthorizationController {
     private final JWTUtil jwtUtil;
     private final ModelMapper modelMapper;
     private final AuthorizationService authorizationService;
-
     private static final String PERFORM_REGISTRATION = "/api/auth/registration";
     private static final String PERFORM_LOGIN = "/api/auth/login";
 
     @PostMapping(PERFORM_REGISTRATION)
-    public Map<String, String> performRegistration(@RequestBody PersonDto personDto){
+    public ResponseEntity<HttpStatus> performRegistration(@RequestBody PersonDto personDto){
         Person person = convertToUser(personDto);
-        Person authorizedPerson = authorizationService.register(person);
+        authorizationService.register(person);
 
-
-        String token = jwtUtil.generateToken(authorizedPerson.getId());
-        return Map.of("jwt-token",token);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @PostMapping(PERFORM_LOGIN)

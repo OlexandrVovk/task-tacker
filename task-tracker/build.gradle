@@ -35,15 +35,12 @@ dependencies {
 }
 
 dependencies {
-
-
     testImplementation 'junit:junit:4.13.1'
     testImplementation 'org.projectlombok:lombok:1.18.22'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     testImplementation 'org.mockito:mockito-core:4.11.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'com.h2database:h2:2.1.214'
-
 }
 
 dependencyManagement {

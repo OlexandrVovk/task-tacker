@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.authorizationservice.services.CustomUserDetailsService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,7 @@ import java.util.Date;
 @Component
 @RequiredArgsConstructor
 public class JWTUtil {
-    private final UserDetailsService userDetailsService;
+    private CustomUserDetailsService userDetailsService;
 
     @Value("${jwt_secret}")
     private String secret;
@@ -40,15 +41,16 @@ public class JWTUtil {
                 .sign(Algorithm.HMAC256(secret));
     }
 
-    public String validateTokenAndRetrieveClaim(String token) {
+    public Long validateTokenAndRetrieveClaim(String token) {
         JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret))
                 .withSubject("User details")
                 .withIssuer("authorization-service")
                 .build();
 
         DecodedJWT jwt = verifier.verify(token);
-        return jwt.getClaim("username").asString();
+        return jwt.getClaim("id").asLong();
     }
+
 
     public UserDetails parseRequest(HttpServletRequest request){
         UserDetails userDetails = null;
@@ -59,8 +61,8 @@ public class JWTUtil {
                 //TODO: throw exception missing Jwt token
             }else {
                 try {
-                    String username = validateTokenAndRetrieveClaim(jwt);
-                    userDetails = userDetailsService.loadUserByUsername(username);
+                    Long personId = validateTokenAndRetrieveClaim(jwt);
+                    userDetails = userDetailsService.loadUserByUserId(personId);
                 }catch (JWTVerificationException e){
                     //TODO: throw exception invalid JWT token
                 }

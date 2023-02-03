@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/authorization-service/src/test/resources/empty/reset.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/authorization-service/src/test/resources/init/person-data.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/task-tracker/src/test/resources/empty/reset.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/task-tracker/src/test/resources/init/board-data.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/task-tracker/src/test/resources/init/task-state-data.sql" dialect="GenericSQL" />

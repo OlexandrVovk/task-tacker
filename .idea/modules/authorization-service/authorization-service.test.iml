@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$/../../../authorization-service/src/test">
+      <sourceFolder url="file://$MODULE_DIR$/../../../authorization-service/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../authorization-service/src/test/resources" type="java-test-resource" />
+    </content>
+  </component>
+</module>

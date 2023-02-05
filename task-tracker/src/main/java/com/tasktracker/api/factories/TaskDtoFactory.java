@@ -2,7 +2,6 @@ package com.tasktracker.api.factories;
 
 import com.tasktracker.api.dto.TaskDto;
 import com.tasktracker.store.entities.TaskEntity;
-import com.tasktracker.store.entities.TaskStateEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,8 +13,8 @@ public class TaskDtoFactory {
     public TaskDto makeTaskDto(TaskEntity task){
         return TaskDto.builder()
                 .id(task.getId())
-                .leftTaskId(task.getLeftTask().map(TaskEntity::getId).orElse(null))
-                .rightTaskId(task.getRightTask().map(TaskEntity::getId).orElse(null))
+                .previousTaskId(task.getPreviousTask().map(TaskEntity::getId).orElse(null))
+                .nextTaskId(task.getNextTask().map(TaskEntity::getId).orElse(null))
                 .name(task.getName())
                 .description(task.getDescription())
                 .build();

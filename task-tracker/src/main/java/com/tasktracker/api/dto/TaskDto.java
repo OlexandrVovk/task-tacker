@@ -3,8 +3,6 @@ package com.tasktracker.api.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
-import java.util.Date;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -20,8 +18,8 @@ public class TaskDto {
 
     private String description;
 
-    private Long leftTaskId;
+    private Long previousTaskId;
 
-    private Long rightTaskId;
+    private Long nextTaskId;
 
 }

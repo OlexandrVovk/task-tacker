@@ -4,25 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eafaef69-c5e4-4919-97d2-e55be8fecdf6" name="Changes" comment="added unit test for repositories and services">
+    <list default="true" id="eafaef69-c5e4-4919-97d2-e55be8fecdf6" name="Changes" comment="updated integration tests in task-tracker">
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c/storage_v2/_src_/database/postgres.edMnLQ/schema/information_schema.FNRwLQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c/storage_v2/_src_/database/postgres.edMnLQ/schema/information_schema.FNRwLQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c/storage_v2/_src_/database/postgres.edMnLQ/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c/storage_v2/_src_/database/postgres.edMnLQ/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c/storage_v2/_src_/database/task-tracker.8Jq0nw/schema/information_schema.FNRwLQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c/storage_v2/_src_/database/task-tracker.8Jq0nw/schema/information_schema.FNRwLQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c/storage_v2/_src_/database/task-tracker.8Jq0nw/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c/storage_v2/_src_/database/task-tracker.8Jq0nw/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c/storage_v2/_src_/database/task-tracker.8Jq0nw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3baa5cab-9a98-4f93-87db-2867feeb990c/storage_v2/_src_/database/task-tracker.8Jq0nw/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/filters/CustomAuthenticationEntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/main/java/com/authorizationservice/filters/CustomAuthenticationEntryPoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authorization-service/src/test/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-service/src/test/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/controllers/BoardControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/controllers/BoardControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/dto/TaskDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/dto/TaskDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/dto/TaskStateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/dto/TaskStateDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/factories/TaskDtoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/factories/TaskDtoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/factories/TaskStateDtoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/factories/TaskStateDtoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/services/TaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/services/TaskService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/services/TaskStateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/services/TaskStateService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/store/entities/TaskEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/store/entities/TaskEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/store/entities/TaskStateEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/store/entities/TaskStateEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/controllers/TaskControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/controllers/TaskControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/controllers/TaskStateControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/controllers/TaskStateControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-tracker/src/test/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/test/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/services/TaskServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/services/TaskServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/services/TaskStateServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/test/java/com/tasktracker/api/services/TaskStateServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +109,7 @@
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;jbr-17&quot;,
-    &quot;last_directory_selection&quot;: &quot;D:/PROJECTS/task-tracker-api/authorization-service/src/test/java/com/authorizationservice&quot;,
+    &quot;last_directory_selection&quot;: &quot;D:/PROJECTS/task-tracker-api/task-tracker/src/test/java/com/tasktracker/api&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/PROJECTS/task-tracker-api/task-tracker/src/test/resources&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -144,11 +146,11 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.tasktracker.api.util" />
       <recent name="com.authorizationservice.controllers" />
       <recent name="com.authorizationservice.services" />
       <recent name="com.authorizationservice.repositories" />
       <recent name="com.tasktracker.api.controllers" />
-      <recent name="com.tasktracker.api.services" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.authorizationservice.exceptions" />
@@ -424,7 +426,10 @@
       <workItem from="1675254479233" duration="3329000" />
       <workItem from="1675343993177" duration="7294000" />
       <workItem from="1675418031724" duration="4717000" />
-      <workItem from="1675427481759" duration="1369000" />
+      <workItem from="1675427481759" duration="2287000" />
+      <workItem from="1675501703630" duration="3084000" />
+      <workItem from="1675518608317" duration="294000" />
+      <workItem from="1675587388829" duration="1653000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1672759648941</created>
@@ -461,7 +466,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674308786177</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="updated integration tests in task-tracker">
+      <created>1675429090992</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1675429090992</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -482,7 +494,8 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="full project" />
     <MESSAGE value="added unit test for repositories and services" />
-    <option name="LAST_COMMIT_MESSAGE" value="added unit test for repositories and services" />
+    <MESSAGE value="updated integration tests in task-tracker" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated integration tests in task-tracker" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

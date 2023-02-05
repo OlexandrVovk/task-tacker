@@ -39,7 +39,7 @@ public class TaskService {
                 throw new BadRequestException(String.format("Task with name %s already exists", taskName));
             }
 
-            if (!task.getRightTask().isPresent()){
+            if (!task.getNextTask().isPresent()){
                 optionalTaskEntity = Optional.of(task);
             }
         }
@@ -52,8 +52,8 @@ public class TaskService {
         );
 
         optionalTaskEntity.ifPresent(anotherTask ->{
-             taskEntity.setLeftTask(anotherTask);
-             anotherTask.setRightTask(taskEntity);
+             taskEntity.setPreviousTask(anotherTask);
+             anotherTask.setNextTask(taskEntity);
              taskRepo.saveAndFlush(anotherTask);
         });
 
@@ -82,8 +82,8 @@ public class TaskService {
     public AnswerDto deleteTask(Long taskId, Long personId) {
         TaskEntity taskEntity = getTaskOrThrowException(taskId, personId);
 
-        Optional<TaskEntity> optionalLeftTask = taskEntity.getLeftTask();
-        Optional<TaskEntity> optionalRightTask = taskEntity.getRightTask();
+        Optional<TaskEntity> optionalLeftTask = taskEntity.getPreviousTask();
+        Optional<TaskEntity> optionalRightTask = taskEntity.getNextTask();
 
         if (optionalLeftTask.isEmpty() && optionalRightTask.isEmpty()){
             taskRepo.deleteById(taskId);
@@ -91,8 +91,8 @@ public class TaskService {
             TaskEntity leftTask = optionalLeftTask.get();
             TaskEntity rightTask = optionalRightTask.get();
 
-            leftTask.setRightTask(rightTask);
-            rightTask.setLeftTask(leftTask);
+            leftTask.setNextTask(rightTask);
+            rightTask.setPreviousTask(leftTask);
             taskRepo.save(leftTask);
             taskRepo.save(rightTask);
 
@@ -100,14 +100,14 @@ public class TaskService {
         } else if (optionalLeftTask.isPresent() && optionalRightTask.isEmpty()){
             TaskEntity leftTask = optionalLeftTask.get();
 
-            leftTask.setRightTask(null);
+            leftTask.setNextTask(null);
             taskRepo.save(leftTask);
 
             taskRepo.deleteById(taskId);
         }else if (optionalLeftTask.isEmpty() && optionalRightTask.isPresent()){
             TaskEntity rightTask = optionalRightTask.get();
 
-            rightTask.setLeftTask(null);
+            rightTask.setPreviousTask(null);
             taskRepo.save(rightTask);
 
             taskRepo.deleteById(taskId);
@@ -176,22 +176,22 @@ public class TaskService {
         }
 
         TaskEntity currTask = getTaskOrThrowException(taskId, personId);
-        Optional<TaskEntity> previousCurrTask = currTask.getLeftTask();
-        Optional<TaskEntity> nextCurrTask = currTask.getRightTask();
+        Optional<TaskEntity> previousCurrTask = currTask.getPreviousTask();
+        Optional<TaskEntity> nextCurrTask = currTask.getNextTask();
         previousCurrTask.ifPresent(task -> {
             if (nextCurrTask.isPresent()){
-                task.setRightTask(nextCurrTask.get());
+                task.setNextTask(nextCurrTask.get());
             }else {
-                task.setRightTask(null);
+                task.setNextTask(null);
             }
             taskRepo.save(task);
         });
 
         nextCurrTask.ifPresent(task -> {
             if (previousCurrTask.isPresent()){
-                task.setLeftTask(previousCurrTask.get());
+                task.setPreviousTask(previousCurrTask.get());
             } else {
-                task.setLeftTask(null);
+                task.setPreviousTask(null);
             }
             taskRepo.save(task);
         });
@@ -208,11 +208,11 @@ public class TaskService {
                         .equals(currTask.getTaskState().getBoard().getId())){
                     throw new BadRequestException(String.format("Task with id %d is from different board", task.getId()));
                 }
-                task.setLeftTask(currTask);
-                currTask.setRightTask(task);
+                task.setPreviousTask(currTask);
+                currTask.setNextTask(task);
                 taskRepo.save(task);
             });
-            currTask.setLeftTask(null);
+            currTask.setPreviousTask(null);
             taskRepo.save(currTask);
 
         }else if (nextTask.isEmpty()){
@@ -221,11 +221,11 @@ public class TaskService {
                         .equals(currTask.getTaskState().getBoard().getId())){
                     throw new BadRequestException(String.format("Task with id %d is from different board", task.getId()));
                 }
-                task.setRightTask(currTask);
-                currTask.setLeftTask(task);
+                task.setNextTask(currTask);
+                currTask.setPreviousTask(task);
                 taskRepo.save(task);
             });
-            currTask.setRightTask(null);
+            currTask.setNextTask(null);
             taskRepo.save(currTask);
         }else {
             if (!previousTask.get().getTaskState().getBoard().getId()
@@ -238,13 +238,13 @@ public class TaskService {
                 throw new BadRequestException(String.format("Task with id %d is from different board",
                         nextTask.get().getId()));
             }
-            previousTask.get().setRightTask(currTask);
-            nextTask.get().setLeftTask(currTask);
+            previousTask.get().setNextTask(currTask);
+            nextTask.get().setPreviousTask(currTask);
             taskRepo.save(previousTask.get());
             taskRepo.save(nextTask.get());
 
-            currTask.setLeftTask(previousTask.get());
-            currTask.setRightTask(nextTask.get());
+            currTask.setPreviousTask(previousTask.get());
+            currTask.setNextTask(nextTask.get());
             taskRepo.save(currTask);
         }
 
@@ -255,18 +255,18 @@ public class TaskService {
 
         TaskEntity firstTask = unsortedList
                 .stream()
-                .filter(task -> task.getLeftTask().isEmpty())
+                .filter(task -> task.getPreviousTask().isEmpty())
                 .findFirst()
                 .orElse(unsortedList.get(0));
 
         sortedList.add(firstTask);
-        TaskEntity currTask = firstTask.getRightTask().orElse(null);
+        TaskEntity currTask = firstTask.getNextTask().orElse(null);
 
         int i = 0;
         while (i != unsortedList.size() - 1){
             if (currTask != null){
                 sortedList.add(currTask);
-                currTask = currTask.getRightTask().orElse(null);
+                currTask = currTask.getNextTask().orElse(null);
                 i++;
             }else break;
         }

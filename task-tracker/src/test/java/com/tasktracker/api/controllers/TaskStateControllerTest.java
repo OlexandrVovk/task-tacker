@@ -3,7 +3,6 @@ package com.tasktracker.api.controllers;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tasktracker.api.dto.AnswerDto;
-import com.tasktracker.api.dto.BoardDto;
 import com.tasktracker.api.dto.TaskStateDto;
 import com.tasktracker.api.util.JWTUtil;
 import org.junit.jupiter.api.BeforeEach;
@@ -77,7 +76,7 @@ class TaskStateControllerTest {
 
         assertEquals(200 , mvcResult.getResponse().getStatus());
         assertTrue(resultTaskStateDto.getName().equals(taskStateName));
-        assertTrue(resultTaskStateDto.getLeftTaskStateId()!=null);
+        assertTrue(resultTaskStateDto.getPreviousTaskStateId()!=null);
         assertTrue(resultTaskStateDto.getId().equals(4l));
     }
 
@@ -164,10 +163,10 @@ class TaskStateControllerTest {
         }).findFirst().get();
 
         Optional<TaskStateDto> newLeftTaskState = changedPositionTaskStates.stream().filter(taskStateDto -> {
-            return taskStateDto.getId().equals(updatedTaskState.getLeftTaskStateId());
+            return taskStateDto.getId().equals(updatedTaskState.getPreviousTaskStateId());
         }).findFirst();
         Optional<TaskStateDto> newRightTaskState = changedPositionTaskStates.stream().filter(taskStateDto -> {
-            return taskStateDto.getId().equals(updatedTaskState.getRightTaskStateId());
+            return taskStateDto.getId().equals(updatedTaskState.getNextTaskStateId());
         }).findFirst();
         newLeftTaskState.ifPresent(leftTaskState -> {
             assertTrue(leftTaskState.getId().equals(previousTaskStateId));
@@ -175,8 +174,8 @@ class TaskStateControllerTest {
         newRightTaskState.ifPresent(rightTaskState ->{
             assertTrue(rightTaskState.getId().equals(nextTaskStateId));
         });
-        assertTrue(updatedTaskState.getRightTaskStateId()==nextTaskStateId &&
-                updatedTaskState.getLeftTaskStateId() == previousTaskStateId);
+        assertTrue(updatedTaskState.getNextTaskStateId()==nextTaskStateId &&
+                updatedTaskState.getPreviousTaskStateId() == previousTaskStateId);
         assertEquals(200 , mvcResult.getResponse().getStatus());
 
     }

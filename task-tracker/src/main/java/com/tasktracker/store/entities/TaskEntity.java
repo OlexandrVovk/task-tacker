@@ -3,7 +3,6 @@ package com.tasktracker.store.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
 import java.util.Optional;
 
 @Entity
@@ -31,16 +30,18 @@ public class TaskEntity {
     private TaskStateEntity taskState;
 
     @OneToOne
-    private TaskEntity leftTask;
+//    @Column(name = "left_task_id")
+    private TaskEntity previousTask;
 
     @OneToOne
-    private TaskEntity rightTask;
+//    @Column(name = "right_task_id")
+    private TaskEntity nextTask;
 
-    public Optional<TaskEntity> getLeftTask(){
-        return Optional.ofNullable(leftTask);
+    public Optional<TaskEntity> getPreviousTask(){
+        return Optional.ofNullable(previousTask);
     }
 
-    public Optional<TaskEntity> getRightTask(){
-        return Optional.ofNullable(rightTask);
+    public Optional<TaskEntity> getNextTask(){
+        return Optional.ofNullable(nextTask);
     }
 }

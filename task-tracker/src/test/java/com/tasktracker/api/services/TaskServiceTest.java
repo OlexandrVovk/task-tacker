@@ -70,7 +70,7 @@ class TaskServiceTest {
         taskService.createTask(1l, "test", 1l);
 
 
-        verify(taskEntity, never()).setLeftTask(any(TaskEntity.class));
+        verify(taskEntity, never()).setPreviousTask(any(TaskEntity.class));
         verify(taskRepo, times(2)).saveAndFlush(any(TaskEntity.class));
     }
 
@@ -169,14 +169,14 @@ class TaskServiceTest {
                         .build())
                 .build());
         when(taskRepo.findById(anyLong())).thenReturn(Optional.ofNullable(taskEntity));
-        when(taskEntity.getLeftTask()).thenReturn(Optional.empty());
-        when(taskEntity.getRightTask()).thenReturn(Optional.empty());
+        when(taskEntity.getPreviousTask()).thenReturn(Optional.empty());
+        when(taskEntity.getNextTask()).thenReturn(Optional.empty());
 
         AnswerDto answerDto = taskService.deleteTask(1l, 1l);
 
         assertTrue(answerDto.isAnswer());
-        verify(taskEntity).getLeftTask();
-        verify(taskEntity).getRightTask();
+        verify(taskEntity).getPreviousTask();
+        verify(taskEntity).getNextTask();
         verify(taskRepo).deleteById(anyLong());
     }
 
@@ -202,16 +202,16 @@ class TaskServiceTest {
                 .name("next")
                 .build());
         when(taskRepo.findById(anyLong())).thenReturn(Optional.ofNullable(taskEntity));
-        when(taskEntity.getLeftTask()).thenReturn(Optional.ofNullable(previousTask));
-        when(taskEntity.getRightTask()).thenReturn(Optional.ofNullable(nextTask));
+        when(taskEntity.getPreviousTask()).thenReturn(Optional.ofNullable(previousTask));
+        when(taskEntity.getNextTask()).thenReturn(Optional.ofNullable(nextTask));
 
         AnswerDto answerDto = taskService.deleteTask(1l, 1l);
 
         assertTrue(answerDto.isAnswer());
-        verify(taskEntity).getLeftTask();
-        verify(taskEntity).getRightTask();
-        verify(previousTask).setRightTask(any(TaskEntity.class));
-        verify(nextTask).setLeftTask(any(TaskEntity.class));
+        verify(taskEntity).getPreviousTask();
+        verify(taskEntity).getNextTask();
+        verify(previousTask).setNextTask(any(TaskEntity.class));
+        verify(nextTask).setPreviousTask(any(TaskEntity.class));
         verify(taskRepo, times(2)).save(any(TaskEntity.class));
         verify(taskRepo).deleteById(anyLong());
     }
@@ -234,15 +234,15 @@ class TaskServiceTest {
                 .name("previous")
                 .build());
         when(taskRepo.findById(anyLong())).thenReturn(Optional.ofNullable(taskEntity));
-        when(taskEntity.getLeftTask()).thenReturn(Optional.ofNullable(previousTask));
-        when(taskEntity.getRightTask()).thenReturn(Optional.empty());
+        when(taskEntity.getPreviousTask()).thenReturn(Optional.ofNullable(previousTask));
+        when(taskEntity.getNextTask()).thenReturn(Optional.empty());
 
         AnswerDto answerDto = taskService.deleteTask(1l, 1l);
 
         assertTrue(answerDto.isAnswer());
-        verify(taskEntity).getLeftTask();
-        verify(taskEntity).getRightTask();
-        verify(previousTask).setRightTask(null);
+        verify(taskEntity).getPreviousTask();
+        verify(taskEntity).getNextTask();
+        verify(previousTask).setNextTask(null);
         verify(taskRepo).save(any(TaskEntity.class));
         verify(taskRepo).deleteById(anyLong());
     }
@@ -265,15 +265,15 @@ class TaskServiceTest {
                 .name("next")
                 .build());
         when(taskRepo.findById(anyLong())).thenReturn(Optional.ofNullable(taskEntity));
-        when(taskEntity.getLeftTask()).thenReturn(Optional.empty());
-        when(taskEntity.getRightTask()).thenReturn(Optional.ofNullable(nextTask));
+        when(taskEntity.getPreviousTask()).thenReturn(Optional.empty());
+        when(taskEntity.getNextTask()).thenReturn(Optional.ofNullable(nextTask));
 
         AnswerDto answerDto = taskService.deleteTask(1l, 1l);
 
         assertTrue(answerDto.isAnswer());
-        verify(taskEntity).getLeftTask();
-        verify(taskEntity).getRightTask();
-        verify(nextTask).setLeftTask(null);
+        verify(taskEntity).getPreviousTask();
+        verify(taskEntity).getNextTask();
+        verify(nextTask).setPreviousTask(null);
         verify(taskRepo).save(any(TaskEntity.class));
         verify(taskRepo).deleteById(anyLong());
     }
@@ -395,8 +395,8 @@ class TaskServiceTest {
                 .thenReturn(Optional.ofNullable(currTask))
                 .thenReturn(Optional.ofNullable(previousTask))
                 .thenReturn(Optional.ofNullable(nextTask));
-        when(currTask.getLeftTask()).thenReturn(Optional.empty());
-        when(currTask.getRightTask()).thenReturn(Optional.empty());
+        when(currTask.getPreviousTask()).thenReturn(Optional.empty());
+        when(currTask.getNextTask()).thenReturn(Optional.empty());
 
 
 
@@ -438,8 +438,8 @@ class TaskServiceTest {
                 .thenReturn(Optional.ofNullable(currTask))
                 .thenReturn(Optional.ofNullable(previousTask))
                 .thenReturn(Optional.empty());
-        when(currTask.getLeftTask()).thenReturn(Optional.empty());
-        when(currTask.getRightTask()).thenReturn(Optional.empty());
+        when(currTask.getPreviousTask()).thenReturn(Optional.empty());
+        when(currTask.getNextTask()).thenReturn(Optional.empty());
 
 
 
@@ -480,8 +480,8 @@ class TaskServiceTest {
                 .thenReturn(Optional.ofNullable(currTask))
                 .thenReturn(Optional.empty())
                 .thenReturn(Optional.ofNullable(nextTask));
-        when(currTask.getLeftTask()).thenReturn(Optional.empty());
-        when(currTask.getRightTask()).thenReturn(Optional.empty());
+        when(currTask.getPreviousTask()).thenReturn(Optional.empty());
+        when(currTask.getNextTask()).thenReturn(Optional.empty());
 
 
 
@@ -536,16 +536,16 @@ class TaskServiceTest {
                 .thenReturn(Optional.ofNullable(currTask))
                 .thenReturn(Optional.ofNullable(previousTask))
                 .thenReturn(Optional.ofNullable(nextTask));
-        when(currTask.getLeftTask()).thenReturn(Optional.empty());
-        when(currTask.getRightTask()).thenReturn(Optional.empty());
+        when(currTask.getPreviousTask()).thenReturn(Optional.empty());
+        when(currTask.getNextTask()).thenReturn(Optional.empty());
 
         taskService.changeTaskPosition(1l, Optional.ofNullable(2l), Optional.ofNullable(3l), 1l);
 
         verify(taskRepo, times(3)).save(any(TaskEntity.class));
-        verify(currTask).setLeftTask(any(TaskEntity.class));
-        verify(currTask).setRightTask(any(TaskEntity.class));
-        verify(previousTask).setRightTask(any(TaskEntity.class));
-        verify(nextTask).setLeftTask(any(TaskEntity.class));
+        verify(currTask).setPreviousTask(any(TaskEntity.class));
+        verify(currTask).setNextTask(any(TaskEntity.class));
+        verify(previousTask).setNextTask(any(TaskEntity.class));
+        verify(nextTask).setPreviousTask(any(TaskEntity.class));
     }
 
     @Test
@@ -581,15 +581,15 @@ class TaskServiceTest {
                 .thenReturn(Optional.ofNullable(currTask))
                 .thenReturn(Optional.empty())
                 .thenReturn(Optional.ofNullable(nextTask));
-        when(currTask.getLeftTask()).thenReturn(Optional.empty());
-        when(currTask.getRightTask()).thenReturn(Optional.empty());
+        when(currTask.getPreviousTask()).thenReturn(Optional.empty());
+        when(currTask.getNextTask()).thenReturn(Optional.empty());
 
         taskService.changeTaskPosition(1l, Optional.ofNullable(2l), Optional.ofNullable(3l), 1l);
 
         verify(taskRepo, times(2)).save(any(TaskEntity.class));
-        verify(currTask).setLeftTask(null);
-        verify(currTask).setRightTask(any(TaskEntity.class));
-        verify(nextTask).setLeftTask(any(TaskEntity.class));
+        verify(currTask).setPreviousTask(null);
+        verify(currTask).setNextTask(any(TaskEntity.class));
+        verify(nextTask).setPreviousTask(any(TaskEntity.class));
     }
 
     @Test
@@ -624,14 +624,14 @@ class TaskServiceTest {
                 .thenReturn(Optional.ofNullable(currTask))
                 .thenReturn(Optional.ofNullable(previousTask))
                 .thenReturn(Optional.empty());
-        when(currTask.getLeftTask()).thenReturn(Optional.empty());
-        when(currTask.getRightTask()).thenReturn(Optional.empty());
+        when(currTask.getPreviousTask()).thenReturn(Optional.empty());
+        when(currTask.getNextTask()).thenReturn(Optional.empty());
 
         taskService.changeTaskPosition(1l, Optional.ofNullable(2l), Optional.ofNullable(3l), 1l);
 
         verify(taskRepo, times(2)).save(any(TaskEntity.class));
-        verify(currTask).setLeftTask(any(TaskEntity.class));
-        verify(currTask).setRightTask(null);
-        verify(previousTask).setRightTask(any(TaskEntity.class));
+        verify(currTask).setPreviousTask(any(TaskEntity.class));
+        verify(currTask).setNextTask(null);
+        verify(previousTask).setNextTask(any(TaskEntity.class));
     }
 }

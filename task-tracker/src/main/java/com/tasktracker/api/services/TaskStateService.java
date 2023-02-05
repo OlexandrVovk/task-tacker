@@ -1,13 +1,11 @@
 package com.tasktracker.api.services;
 
-import com.sun.source.util.TaskListener;
 import com.tasktracker.api.dto.AnswerDto;
 import com.tasktracker.api.dto.TaskStateDto;
 import com.tasktracker.api.exceptions.BadRequestException;
 import com.tasktracker.api.exceptions.NotFoundException;
 import com.tasktracker.api.factories.TaskStateDtoFactory;
 import com.tasktracker.store.entities.BoardEntity;
-import com.tasktracker.store.entities.TaskEntity;
 import com.tasktracker.store.entities.TaskStateEntity;
 import com.tasktracker.store.repositories.BoardRepo;
 import com.tasktracker.store.repositories.TaskStateRepo;
@@ -18,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -57,7 +54,7 @@ public class TaskStateService {
                 throw new BadRequestException(String.format("Task state %s already exists.", taskStateName));
             }
 
-            if (!taskState.getRightTaskState().isPresent()) {
+            if (!taskState.getNextTaskState().isPresent()) {
                 optionalAnotherTaskState = Optional.of(taskState);
                 break;
             }
@@ -72,8 +69,8 @@ public class TaskStateService {
 
         optionalAnotherTaskState
                 .ifPresent(anotherTaskState -> {
-                    taskState.setLeftTaskState(anotherTaskState);
-                    anotherTaskState.setRightTaskState(taskState);
+                    taskState.setPreviousTaskState(anotherTaskState);
+                    anotherTaskState.setNextTaskState(taskState);
                     taskStateRepo.saveAndFlush(anotherTaskState);
                 });
 
@@ -113,8 +110,8 @@ public class TaskStateService {
             return AnswerDto.makeDefault(true);
         }
 
-        Optional<TaskStateEntity> leftValue = taskStateEntity.getLeftTaskState();
-        Optional<TaskStateEntity> rightValue = taskStateEntity.getRightTaskState();
+        Optional<TaskStateEntity> leftValue = taskStateEntity.getPreviousTaskState();
+        Optional<TaskStateEntity> rightValue = taskStateEntity.getNextTaskState();
 
         if (leftValue.isEmpty() && rightValue.isEmpty()){
             taskStateRepo.deleteById(taskStateId);
@@ -122,23 +119,23 @@ public class TaskStateService {
             TaskStateEntity rightTaskState = rightValue.get();
             TaskStateEntity leftTaskState = leftValue.get();
 
-            leftTaskState.setRightTaskState(rightTaskState);
-            rightTaskState.setLeftTaskState(leftTaskState);
+            leftTaskState.setNextTaskState(rightTaskState);
+            rightTaskState.setPreviousTaskState(leftTaskState);
 
-            taskStateEntity.setRightTaskState(null);
-            taskStateEntity.setLeftTaskState(null);
+            taskStateEntity.setNextTaskState(null);
+            taskStateEntity.setPreviousTaskState(null);
             taskStateRepo.save(leftTaskState);
             taskStateRepo.save(rightTaskState);
 
             taskStateRepo.deleteById(taskStateId);
         }else if(leftValue.isEmpty()){
             TaskStateEntity rightTaskState = rightValue.get();
-            rightTaskState.setLeftTaskState(null);
+            rightTaskState.setPreviousTaskState(null);
             taskStateRepo.save(rightTaskState);
             taskStateRepo.deleteById(taskStateId);
         }  else {
             TaskStateEntity leftTaskState =  leftValue.get();
-            leftTaskState.setRightTaskState(null);
+            leftTaskState.setNextTaskState(null);
             taskStateRepo.save(leftTaskState);
             taskStateRepo.deleteById(taskStateId);
         }
@@ -166,18 +163,18 @@ public class TaskStateService {
 
         TaskStateEntity firstTaskState = unsortedList
                 .stream()
-                .filter(taskState -> taskState.getLeftTaskState().isEmpty())
+                .filter(taskState -> taskState.getPreviousTaskState().isEmpty())
                 .findFirst()
                 .get();
 
         sortedList.add(firstTaskState);
-        TaskStateEntity currTaskState = firstTaskState.getRightTaskState().orElse(null);
+        TaskStateEntity currTaskState = firstTaskState.getNextTaskState().orElse(null);
 
         int i = 0;
         while (i != unsortedList.size() - 1){
             if (currTaskState != null){
                 sortedList.add(currTaskState);
-                currTaskState = currTaskState.getRightTaskState().orElse(null);
+                currTaskState = currTaskState.getNextTaskState().orElse(null);
                 i++;
             }else break;
         }
@@ -201,23 +198,23 @@ public class TaskStateService {
         }
 
         TaskStateEntity currTaskState = getTaskStateOrThrowException(taskStateId, personId);
-        Optional<TaskStateEntity> previousCurrTaskState = currTaskState.getLeftTaskState();
-        Optional<TaskStateEntity> nextCurrTaskState = currTaskState.getRightTaskState();
+        Optional<TaskStateEntity> previousCurrTaskState = currTaskState.getPreviousTaskState();
+        Optional<TaskStateEntity> nextCurrTaskState = currTaskState.getNextTaskState();
 
         previousCurrTaskState.ifPresent(taskState -> {
             if (nextCurrTaskState.isPresent()){
-                taskState.setRightTaskState(nextCurrTaskState.get());
+                taskState.setNextTaskState(nextCurrTaskState.get());
             }else {
-                taskState.setRightTaskState(null);
+                taskState.setNextTaskState(null);
             }
             taskStateRepo.save(taskState);
         });
 
        nextCurrTaskState.ifPresent(taskState -> {
             if (previousCurrTaskState.isPresent()){
-                taskState.setLeftTaskState(previousCurrTaskState.get());
+                taskState.setPreviousTaskState(previousCurrTaskState.get());
             }else {
-                taskState.setLeftTaskState(null);
+                taskState.setPreviousTaskState(null);
             }
             taskStateRepo.save(taskState);
         });
@@ -235,22 +232,22 @@ public class TaskStateService {
                if(!taskState.getBoard().getId().equals(currTaskState.getBoard().getId())){
                    throw new BadRequestException(String.format("Task state with id %d is from different board", taskState.getId()));
                }
-               taskState.setLeftTaskState(currTaskState);
-               currTaskState.setRightTaskState(taskState);
+               taskState.setPreviousTaskState(currTaskState);
+               currTaskState.setNextTaskState(taskState);
                taskStateRepo.save(taskState);
            });
-           currTaskState.setLeftTaskState(null);
+           currTaskState.setPreviousTaskState(null);
            taskStateRepo.save(currTaskState);
        }else if (nextTaskState.isEmpty()){
            previousTaskState.ifPresent(taskState -> {
                if(!taskState.getBoard().getId().equals(currTaskState.getBoard().getId())){
                    throw new BadRequestException(String.format("Task state with id %d is from different board", taskState.getId()));
                }
-               taskState.setRightTaskState(currTaskState);
-               currTaskState.setLeftTaskState(taskState);
+               taskState.setNextTaskState(currTaskState);
+               currTaskState.setPreviousTaskState(taskState);
                taskStateRepo.save(taskState);
            });
-           currTaskState.setRightTaskState(null);
+           currTaskState.setNextTaskState(null);
            taskStateRepo.save(currTaskState);
        }else {
            if(!previousTaskState.get().getBoard().getId().equals(currTaskState.getBoard().getId())){
@@ -261,13 +258,13 @@ public class TaskStateService {
                throw new BadRequestException(String.format("Task state with id %d is from different board",
                       nextCurrTaskState.get().getId()));
            }
-           previousTaskState.get().setRightTaskState(currTaskState);
-           nextTaskState.get().setLeftTaskState(currTaskState);
+           previousTaskState.get().setNextTaskState(currTaskState);
+           nextTaskState.get().setPreviousTaskState(currTaskState);
            taskStateRepo.save(previousTaskState.get());
            taskStateRepo.save(nextTaskState.get());
 
-           currTaskState.setLeftTaskState(previousTaskState.get());
-           currTaskState.setRightTaskState(nextTaskState.get());
+           currTaskState.setPreviousTaskState(previousTaskState.get());
+           currTaskState.setNextTaskState(nextTaskState.get());
            taskStateRepo.save(currTaskState);
        }
 

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.tasktracker.api.dto.AnswerDto;
 import com.tasktracker.api.dto.TaskDto;
-import com.tasktracker.api.dto.TaskStateDto;
 import com.tasktracker.api.util.JWTUtil;
 import jakarta.ws.rs.core.MediaType;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,11 +23,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -153,7 +150,7 @@ class TaskControllerTest {
         TaskDto resultTaskDto = objectMapper.readValue(jsonResponse, TaskDto.class);
 
         assertEquals(200 , mvcResult.getResponse().getStatus());
-        assertTrue(resultTaskDto.getLeftTaskId().equals(previousTaskId) &&
-                resultTaskDto.getRightTaskId().equals(nextTaskId));
+        assertTrue(resultTaskDto.getPreviousTaskId().equals(previousTaskId) &&
+                resultTaskDto.getNextTaskId().equals(nextTaskId));
     }
 }

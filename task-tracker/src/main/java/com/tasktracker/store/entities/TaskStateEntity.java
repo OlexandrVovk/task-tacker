@@ -25,10 +25,10 @@ public class TaskStateEntity {
     private String name;
 
     @OneToOne
-    private TaskStateEntity leftTaskState;
+    private TaskStateEntity previousTaskState;
 
     @OneToOne
-    private TaskStateEntity rightTaskState;
+    private TaskStateEntity nextTaskState;
 
     @ManyToOne
     @JoinColumn(name = "board_id", referencedColumnName = "id")
@@ -38,11 +38,11 @@ public class TaskStateEntity {
     @Builder.Default
     private List<TaskEntity> tasks = new ArrayList<>();
 
-    public Optional<TaskStateEntity> getLeftTaskState(){
-        return Optional.ofNullable(leftTaskState);
+    public Optional<TaskStateEntity> getPreviousTaskState(){
+        return Optional.ofNullable(previousTaskState);
     }
-    public Optional<TaskStateEntity> getRightTaskState(){
-        return Optional.ofNullable(rightTaskState);
+    public Optional<TaskStateEntity> getNextTaskState(){
+        return Optional.ofNullable(nextTaskState);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class TaskStateEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TaskStateEntity that = (TaskStateEntity) o;
-        return id.equals(that.id) && Objects.equals(name, that.name) && Objects.equals(leftTaskState, that.leftTaskState) && Objects.equals(rightTaskState, that.rightTaskState) && board.equals(that.board) && Objects.equals(tasks, that.tasks);
+        return id.equals(that.id) && Objects.equals(name, that.name) && Objects.equals(previousTaskState, that.previousTaskState) && Objects.equals(nextTaskState, that.nextTaskState) && board.equals(that.board) && Objects.equals(tasks, that.tasks);
     }
 
 }

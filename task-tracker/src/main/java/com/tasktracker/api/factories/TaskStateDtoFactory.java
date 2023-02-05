@@ -1,7 +1,6 @@
 package com.tasktracker.api.factories;
 
 import com.tasktracker.api.dto.TaskStateDto;
-import com.tasktracker.api.services.TaskService;
 import com.tasktracker.store.entities.TaskStateEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -19,8 +18,8 @@ public class TaskStateDtoFactory {
         return TaskStateDto.builder()
                 .id(taskState.getId())
                 .name(taskState.getName())
-                .leftTaskStateId(taskState.getLeftTaskState().map(TaskStateEntity::getId).orElse(null))
-                .rightTaskStateId(taskState.getRightTaskState().map(TaskStateEntity::getId).orElse(null))
+                .previousTaskStateId(taskState.getPreviousTaskState().map(TaskStateEntity::getId).orElse(null))
+                .nextTaskStateId(taskState.getNextTaskState().map(TaskStateEntity::getId).orElse(null))
                 .tasks(
                         taskState.getTasks()
                         .stream()

@@ -2,7 +2,6 @@ package com.tasktracker.api.services;
 
 import com.tasktracker.api.dto.TaskStateDto;
 import com.tasktracker.api.exceptions.BadRequestException;
-import com.tasktracker.api.exceptions.NotFoundException;
 import com.tasktracker.api.factories.TaskStateDtoFactory;
 import com.tasktracker.store.entities.BoardEntity;
 import com.tasktracker.store.entities.TaskStateEntity;
@@ -195,8 +194,8 @@ class TaskStateServiceTest {
 
         taskStateService.deleteTuskState(1l, Optional.of(false), 1l);
 
-        verify(taskState).getLeftTaskState();
-        verify(taskState).getRightTaskState();
+        verify(taskState).getPreviousTaskState();
+        verify(taskState).getNextTaskState();
         verify(taskStateRepo, never()).save(any(TaskStateEntity.class));
         verify(taskStateRepo).deleteById(anyLong());
     }
@@ -214,13 +213,13 @@ class TaskStateServiceTest {
                 .name("test 2")
                 .id(2l)
                 .build());
-        when(taskState.getLeftTaskState()).thenReturn(Optional.ofNullable(leftTaskState));
+        when(taskState.getPreviousTaskState()).thenReturn(Optional.ofNullable(leftTaskState));
         when(taskStateRepo.findById(anyLong()))
                 .thenReturn(Optional.ofNullable(taskState));
 
         taskStateService.deleteTuskState(1l, Optional.of(false), 1l);
 
-        verify(leftTaskState).setRightTaskState(null);
+        verify(leftTaskState).setNextTaskState(null);
         verify(taskStateRepo).deleteById(anyLong());
 
     }
@@ -242,15 +241,15 @@ class TaskStateServiceTest {
                 .name("test 3")
                 .id(3l)
                 .build());
-        when(taskState.getLeftTaskState()).thenReturn(Optional.ofNullable(leftTaskState));
-        when(taskState.getRightTaskState()).thenReturn(Optional.ofNullable(rightTaskState));
+        when(taskState.getPreviousTaskState()).thenReturn(Optional.ofNullable(leftTaskState));
+        when(taskState.getNextTaskState()).thenReturn(Optional.ofNullable(rightTaskState));
         when(taskStateRepo.findById(anyLong()))
                 .thenReturn(Optional.ofNullable(taskState));
 
         taskStateService.deleteTuskState(1l, Optional.of(false), 1l);
 
-        verify(taskState).setRightTaskState(null);
-        verify(taskState).setLeftTaskState(null);
+        verify(taskState).setNextTaskState(null);
+        verify(taskState).setPreviousTaskState(null);
         verify(taskStateRepo).deleteById(anyLong());
     }
 
@@ -294,11 +293,11 @@ class TaskStateServiceTest {
 
         taskStateService.changeTaskStatePosition(1l, Optional.of( 2l), Optional.of(3l), 1l);
 
-        verify(previousTaskState).setRightTaskState(any(TaskStateEntity.class));
-        verify(nextTaskState).setLeftTaskState(any(TaskStateEntity.class));
+        verify(previousTaskState).setNextTaskState(any(TaskStateEntity.class));
+        verify(nextTaskState).setPreviousTaskState(any(TaskStateEntity.class));
         verify(taskStateRepo, times(3)).save(any(TaskStateEntity.class));
-        verify(taskState).setRightTaskState(any(TaskStateEntity.class));
-        verify(taskState).setLeftTaskState(any(TaskStateEntity.class));
+        verify(taskState).setNextTaskState(any(TaskStateEntity.class));
+        verify(taskState).setPreviousTaskState(any(TaskStateEntity.class));
     }
     @Test
     void shouldChangeTaskStatePositionWhenNextTaskStateIsMissing() {
@@ -330,10 +329,10 @@ class TaskStateServiceTest {
 
         taskStateService.changeTaskStatePosition(1l, Optional.of( 2l), Optional.empty(), 1l);
 
-        verify(previousTaskState).setRightTaskState(any(TaskStateEntity.class));
+        verify(previousTaskState).setNextTaskState(any(TaskStateEntity.class));
         verify(taskStateRepo, times(2)).save(any(TaskStateEntity.class));
-        verify(taskState).setRightTaskState(null);
-        verify(taskState).setLeftTaskState(any(TaskStateEntity.class));
+        verify(taskState).setNextTaskState(null);
+        verify(taskState).setPreviousTaskState(any(TaskStateEntity.class));
     }
 
     @Test
@@ -365,10 +364,10 @@ class TaskStateServiceTest {
 
         taskStateService.changeTaskStatePosition(1l, Optional.empty(), Optional.of(3l), 1l);
 
-        verify(nextTaskState).setLeftTaskState(any(TaskStateEntity.class));
+        verify(nextTaskState).setPreviousTaskState(any(TaskStateEntity.class));
         verify(taskStateRepo, times(2)).save(any(TaskStateEntity.class));
-        verify(taskState).setRightTaskState(any(TaskStateEntity.class));
-        verify(taskState).setLeftTaskState(null);
+        verify(taskState).setNextTaskState(any(TaskStateEntity.class));
+        verify(taskState).setPreviousTaskState(null);
     }
 
     @Test

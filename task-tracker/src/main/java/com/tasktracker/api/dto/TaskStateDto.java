@@ -1,7 +1,5 @@
 package com.tasktracker.api.dto;
 
-import com.tasktracker.store.entities.TaskEntity;
-import jakarta.persistence.Column;
 import lombok.*;
 
 
@@ -20,9 +18,9 @@ public class TaskStateDto {
     @NonNull
     private String name;
 
-    private Long leftTaskStateId;
+    private Long previousTaskStateId;
 
-    private Long rightTaskStateId;
+    private Long nextTaskStateId;
 
     private List<TaskDto> tasks;
 }

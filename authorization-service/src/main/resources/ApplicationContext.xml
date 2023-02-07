@@ -1,3 +1,0 @@
-<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-    <property name="basename" value="yourFolder/myMessages"/>
-</bean>

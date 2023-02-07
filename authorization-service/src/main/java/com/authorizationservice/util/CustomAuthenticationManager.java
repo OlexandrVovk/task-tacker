@@ -1,6 +1,8 @@
 package com.authorizationservice.util;
 
 import com.authorizationservice.entity.Person;
+import com.authorizationservice.exceptions.InvalidTokenException;
+import com.authorizationservice.exceptions.NotFoundException;
 import com.authorizationservice.repositories.PersonRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,11 +29,10 @@ public class CustomAuthenticationManager implements AuthenticationManager {
                       foundPerson.get().getName(),
                       foundPerson.get().getPassword());
           }else {
-              //todo: throw invalid jwt token exception
+              throw  new InvalidTokenException("invalid JWT token");
           }
        }else {
-           //todo: trow bad request excepton
+           throw new NotFoundException("wrong credentials. User was not found");
        }
-       return null;
     }
 }

@@ -5,6 +5,9 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.authorizationservice.exceptions.BadRequestException;
+import com.authorizationservice.exceptions.InvalidTokenException;
+import com.authorizationservice.exceptions.NotFoundException;
 import com.authorizationservice.services.CustomUserDetailsService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -58,17 +61,17 @@ public class JWTUtil {
         if (authHeader!=null && authHeader.isBlank() && authHeader.startsWith("Bearer ")){
             String jwt = authHeader.substring(7);
             if (jwt.isBlank()){
-                //TODO: throw exception missing Jwt token
+                throw  new NotFoundException("missing jwt token");
             }else {
                 try {
                     Long personId = validateTokenAndRetrieveClaim(jwt);
                     userDetails = userDetailsService.loadUserByUserId(personId);
                 }catch (JWTVerificationException e){
-                    //TODO: throw exception invalid JWT token
+                    throw new InvalidTokenException("invalid jwt token");
                 }
             }
         }else {
-            //todo: throw bad request exception
+            throw new BadRequestException("invalid Authorization header");
         }
         return userDetails;
     }

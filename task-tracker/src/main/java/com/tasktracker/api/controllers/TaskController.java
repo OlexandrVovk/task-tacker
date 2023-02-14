@@ -59,6 +59,7 @@ public class TaskController {
                                       @RequestParam(value = "previous_task_id",required = false) Optional<Long> previousTaskId,
                                       @RequestParam(value = "next_task_id" , required = false)Optional<Long> nextTaskId,
                                       HttpServletRequest request){
+        //TODO
         Long personId = jwtUtil.getPersonId(request);
         return taskService.changeTaskPosition(taskId, previousTaskId, nextTaskId,personId);
     }

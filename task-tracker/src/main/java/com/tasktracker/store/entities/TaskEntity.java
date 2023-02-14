@@ -30,11 +30,9 @@ public class TaskEntity {
     private TaskStateEntity taskState;
 
     @OneToOne
-//    @Column(name = "left_task_id")
     private TaskEntity previousTask;
 
     @OneToOne
-//    @Column(name = "right_task_id")
     private TaskEntity nextTask;
 
     public Optional<TaskEntity> getPreviousTask(){

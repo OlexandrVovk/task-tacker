@@ -79,24 +79,24 @@ public class TaskStateService {
     }
 
     @Transactional
-    public TaskStateDto updateTaskState(Long taskStateId, String updatedTaskStateName, Long personId) {
-        if (updatedTaskStateName.isBlank()) {
+    public TaskStateDto updateTaskState(Long taskStateId, String newTaskStateName, Long personId) {
+        if (newTaskStateName.isBlank()) {
             throw new BadRequestException("Task state name can't be empty.");
         }
         TaskStateEntity taskStateEntity = getTaskStateOrThrowException(taskStateId, personId);
 
 
         taskStateRepo.findTaskStateEntityByBoardIdAndNameIgnoreCase(
-                        taskStateEntity.getBoard().getId(), updatedTaskStateName)
+                        taskStateEntity.getBoard().getId(), newTaskStateName)
         .filter(anotherTaskState->!anotherTaskState.getId().equals(taskStateId))
                 .ifPresent(it->{
                     throw new BadRequestException(
-                            String.format("Board %s already exists.",updatedTaskStateName)
+                            String.format("Board %s already exists.",newTaskStateName)
                     );
                 });
 
 
-        taskStateEntity.setName(updatedTaskStateName);
+        taskStateEntity.setName(newTaskStateName);
         final TaskStateEntity savedTaskState = taskStateRepo.saveAndFlush(taskStateEntity);
         return taskStateDtoFactory.makeTaskStateDto(savedTaskState);
     }

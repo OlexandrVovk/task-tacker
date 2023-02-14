@@ -63,10 +63,10 @@ public class TaskStateController {
 
     @PatchMapping(UPDATE_TASK_STATE)
     public TaskStateDto updateTaskState(@PathVariable("tusk_state_id") Long tuskStateId,
-                                        @RequestParam("updated_name") String updatedTaskStateName,
+                                        @RequestParam("new_name") String newTaskStateName,
                                         HttpServletRequest request){
         Long personId = jwtUtil.getPersonId(request);
-        return taskStateService.updateTaskState(tuskStateId, updatedTaskStateName, personId);
+        return taskStateService.updateTaskState(tuskStateId, newTaskStateName, personId);
     }
 
     @DeleteMapping(DELETE_TASK_STATE)

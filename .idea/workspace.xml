@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eafaef69-c5e4-4919-97d2-e55be8fecdf6" name="Changes" comment="updated integration tests in task-tracker">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="eafaef69-c5e4-4919-97d2-e55be8fecdf6" name="Changes" comment="Updated ports for eureka-server and api-gateway.&#10;Added README.md">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/controllers/TaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/controllers/TaskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/controllers/TaskStateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/controllers/TaskStateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/services/TaskStateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/api/services/TaskStateService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/store/entities/TaskEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/task-tracker/src/main/java/com/tasktracker/store/entities/TaskEntity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -425,6 +421,7 @@
       <workItem from="1675930935789" duration="8667000" />
       <workItem from="1675953376449" duration="2652000" />
       <workItem from="1676019392198" duration="8981000" />
+      <workItem from="1676382850009" duration="516000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1672759648941</created>
@@ -468,7 +465,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675429090992</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Updated ports for eureka-server and api-gateway.&#10;Added README.md">
+      <created>1676383090979</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1676383090979</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -490,7 +494,8 @@
     <MESSAGE value="full project" />
     <MESSAGE value="added unit test for repositories and services" />
     <MESSAGE value="updated integration tests in task-tracker" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated integration tests in task-tracker" />
+    <MESSAGE value="Updated ports for eureka-server and api-gateway.&#10;Added README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated ports for eureka-server and api-gateway.&#10;Added README.md" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -3,7 +3,7 @@
 *.iml
 *.ipr
 *.iws
-.idea/
+.idea
 
 *.ctxt
 
@@ -16,7 +16,6 @@
 hs_err_pid*
 
 .gradle
-/build/
 
 gradle-app.setting
 
